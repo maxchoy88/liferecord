@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>阿盛战略矩阵终端 v5.4 - 战略打包版</title>
+    <title>阿盛战略矩阵终端 v5.6</title>
     <!-- 核心库引入 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -20,8 +20,7 @@
                         'git-border': '#30363d',
                         'git-blue': '#58a6ff',
                         'git-green': '#3fb950',
-                        'git-red': '#f85149',
-                        'matrix-gold': '#d4af37'
+                        'git-red': '#f85149'
                     }
                 }
             }
@@ -41,7 +40,7 @@
         #ai-text strong { color: #fff; }
         #ai-text blockquote { border-left: 4px solid #30363d; padding-left: 1rem; font-style: italic; color: #8b949e; }
 
-        /* 打印模式深度优化：确保导出的 PDF 极其整齐 */
+        /* 打印模式深度优化 */
         @media print {
             .no-print { display: none !important; }
             body { background: white !important; color: black !important; padding: 0 !important; }
@@ -52,7 +51,6 @@
             #ai-text h1, #ai-text h2 { color: black !important; border-bottom-color: #000 !important; }
             #ai-text strong { color: #000 !important; }
             #ai-text { border-left-color: #ddd !important; }
-            .heatmap-container { display: block !important; page-break-inside: avoid; }
         }
         
         .animate-spin-slow { animation: spin 10s linear infinite; }
@@ -73,17 +71,17 @@
                 </div>
                 <div>
                     <div class="flex items-center gap-2">
-                        <h1 class="text-xl font-bold text-white tracking-tight">阿盛-战略审计终端-v5.4</h1>
-                        <span class="text-[10px] font-bold border border-git-green px-2 py-0.5 rounded-full text-git-green bg-git-green/10 uppercase">PDF 打包就绪</span>
+                        <h1 class="text-xl font-bold text-white tracking-tight">阿盛-战略审计终端-v5.6</h1>
+                        <span class="text-[10px] font-bold border border-git-green px-2 py-0.5 rounded-full text-git-green bg-git-green/10 uppercase">终极精简版</span>
                     </div>
                     <p class="text-xs text-slate-500 font-mono mt-1 flex items-center gap-2 uppercase tracking-tighter">
-                        <i class="fa-solid fa-file-export text-git-green"></i> 导出模式：全息 Unicode 安全
+                        <i class="fa-solid fa-microchip text-git-green"></i> 模式：数据化全息审计
                     </p>
                 </div>
             </div>
             <div class="flex gap-3">
                 <button onclick="shareWhatsApp()" class="flex items-center gap-2 px-4 py-2 bg-[#21262d] border border-git-border rounded-lg text-sm font-semibold hover:bg-[#30363d] transition-all">
-                    <i class="fa-brands fa-whatsapp text-git-green text-lg"></i> <span class="hidden sm:inline">WhatsApp 发送摘要</span>
+                    <i class="fa-brands fa-whatsapp text-git-green text-lg"></i> <span class="hidden sm:inline">WhatsApp 导读分享</span>
                 </button>
                 <button onclick="window.print()" class="flex items-center gap-2 px-4 py-2 bg-git-green text-white rounded-lg text-sm font-semibold shadow-lg hover:brightness-110 transition-all active:scale-95">
                     <i class="fa-solid fa-file-pdf"></i> <span class="hidden sm:inline">导出 PDF 报告</span>
@@ -94,14 +92,14 @@
         <!-- 打印报告抬头 -->
         <div class="hidden only-print text-center border-b-4 border-black pb-8 mb-10">
             <h1 class="text-3xl font-black text-black uppercase tracking-widest">阿盛 (Castor) 2026 全相位战略执行蓝图</h1>
-            <p class="text-sm font-mono mt-2 text-slate-600 italic">“波 (Bo) AI 战略核心 v5.4 | 商业全息审计报告”</p>
+            <p class="text-sm font-mono mt-2 text-slate-600 italic">“波 (Bo) AI 战略核心 v5.6 | 纯净审计报告”</p>
         </div>
 
         <!-- 1. 配置控制台 -->
         <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 no-print">
             <div class="lg:col-span-8 glass p-6 rounded-3xl shadow-xl">
                 <div class="flex justify-between items-center mb-6 px-1">
-                    <div class="flex items-center gap-2 text-white font-bold text-[10px] uppercase tracking-widest"><i class="fa-solid fa-gears text-git-blue"></i> 矩阵初始化参数 (INIT_PARAMS)</div>
+                    <div class="flex items-center gap-2 text-white font-bold text-[10px] uppercase tracking-widest"><i class="fa-solid fa-sliders text-git-blue"></i> 矩阵核心参数 (MATRIX_CORE)</div>
                     <div class="flex bg-git-bg p-1 rounded-lg border border-git-border">
                         <button onclick="setGender('Male')" id="btn-male" class="px-4 py-1.5 rounded-md text-[10px] font-bold bg-git-blue text-white shadow-lg transition-all">男 MALE</button>
                         <button onclick="setGender('Female')" id="btn-female" class="px-4 py-1.5 rounded-md text-[10px] font-bold text-slate-500 transition-all">女 FEMALE</button>
@@ -122,14 +120,14 @@
                     </div>
                 </div>
                 <div class="pt-4 border-t border-git-border">
-                    <span class="text-[9px] text-git-green font-bold uppercase tracking-widest mb-4 block px-1">设定目标执行年份 (TARGET_YEAR)</span>
+                    <span class="text-[9px] text-git-green font-bold uppercase tracking-widest mb-4 block px-1">设定分析目标年份 (TARGET_YEAR)</span>
                     <div id="year-selector" class="flex gap-2 overflow-x-auto no-scrollbar py-1"></div>
                 </div>
             </div>
             <div class="lg:col-span-4 glass p-6 rounded-3xl flex flex-col justify-center items-center text-center">
-                <span class="text-[10px] font-bold text-slate-500 uppercase mb-2 tracking-widest">流年 Commit 指数</span>
-                <div id="flow-number" class="text-8xl font-black text-git-green tracking-tighter mb-2 animate-pulse">--</div>
-                <div id="flow-label" class="text-[10px] font-mono text-git-green uppercase px-4 py-1 bg-git-green/10 rounded-full border border-git-green/20">SYSTEM_READY</div>
+                <span class="text-[10px] font-bold text-slate-500 uppercase mb-2 tracking-widest">流年 Commit 权重</span>
+                <div id="flow-number" class="text-8xl font-black text-git-green tracking-tighter mb-2">--</div>
+                <div id="flow-label" class="text-[10px] font-mono text-git-green uppercase px-4 py-1 bg-git-green/10 rounded-full border border-git-green/20">READY</div>
             </div>
         </section>
 
@@ -149,67 +147,28 @@
                             <p id="display-id" class="text-[9px] text-slate-500 font-mono uppercase mt-2 tracking-widest"></p>
                         </div>
                     </div>
-                    <div id="metrics-list" class="space-y-5"></div>
-                    
-                    <!-- Money 情绪中和因子 -->
-                    <div class="mt-10 p-5 bg-git-bg rounded-xl border border-rose-500/20 print:bg-slate-50">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-[10px] font-black text-rose-400 uppercase flex items-center gap-2"><i class="fa-solid fa-cat"></i> 生物稳压器: Money</span>
-                            <span class="text-[9px] font-mono text-rose-300">在线平衡中</span>
-                        </div>
-                        <div class="flex gap-1.5">
-                            <div class="h-4 flex-1 bg-rose-500/40 rounded-sm"></div>
-                            <div class="h-4 flex-1 bg-rose-500/40 rounded-sm"></div>
-                            <div class="h-4 flex-1 bg-rose-500/40 rounded-sm"></div>
-                            <div class="h-4 flex-1 bg-rose-500/40 rounded-sm"></div>
-                            <div class="h-4 flex-1 bg-git-bg rounded-sm border border-git-border"></div>
-                        </div>
-                        <p class="text-[9px] text-slate-500 mt-3 italic text-center uppercase tracking-tighter">"通过 Money 的稳态频率对冲交易焦虑"</p>
-                    </div>
-                </div>
-
-                <!-- 逻辑内核代码 -->
-                <div class="glass p-6 rounded-2xl print:page-break-inside-avoid">
-                    <div class="flex items-center gap-2 mb-4 text-git-blue">
-                        <i class="fa-solid fa-terminal text-xs"></i>
-                        <span class="text-[10px] font-black uppercase tracking-widest">核心算法逻辑 (Life_Kernel.js)</span>
-                    </div>
-                    <pre id="code-logic" class="text-[11px] font-mono leading-[1.8] text-[#c9d1d9] bg-git-bg p-5 rounded-xl border border-git-border print:bg-white print:text-black overflow-hidden"></pre>
+                    <!-- 量化指标列表 -->
+                    <div id="metrics-list" class="space-y-6"></div>
                 </div>
             </div>
 
-            <!-- 右侧：八角雷达罗盘 -->
-            <div class="lg:col-span-8 glass p-10 rounded-[3.5rem] flex flex-col items-center justify-center relative print:border-none">
+            <!-- 右侧：八角雷达罗盘 (去除了热力图，空间更纯净) -->
+            <div class="lg:col-span-8 glass p-10 rounded-[3.5rem] flex flex-col items-center justify-center relative print:border-none min-h-[600px]">
                 <div class="absolute top-10 left-12 flex items-center gap-2 opacity-20 no-print">
-                    <i class="fa-solid fa-fingerprint animate-pulse text-git-blue"></i>
-                    <span class="text-[10px] font-mono tracking-[0.6em]">DECISION_MATRIX_V5.4</span>
+                    <i class="fa-solid fa-crosshairs animate-pulse text-git-blue"></i>
+                    <span class="text-[10px] font-mono tracking-[0.6em]">QUANTIFIED_RADAR_V5.6</span>
                 </div>
 
-                <div class="relative w-[500px] h-[500px] flex items-center justify-center">
+                <div class="relative w-full max-w-[550px] aspect-square flex items-center justify-center">
                     <canvas id="radarChart"></canvas>
                     <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <div class="w-32 h-32 rounded-[3.5rem] bg-slate-900 border-4 border-git-border shadow-[0_0_50px_rgba(88,166,255,0.2)] flex flex-col items-center justify-center print:bg-white print:text-black print:border-black">
+                        <div class="w-36 h-36 rounded-[3.5rem] bg-slate-900 border-4 border-git-border shadow-[0_0_50px_rgba(88,166,255,0.2)] flex flex-col items-center justify-center print:bg-white print:text-black print:border-black">
                             <span class="text-[10px] font-mono text-slate-500 mb-1">主命数</span>
                             <span id="center-f" class="text-7xl font-black leading-none">3</span>
                             <div class="h-0.5 w-12 bg-git-green my-2"></div>
-                            <span class="text-[9px] font-bold text-git-blue tracking-widest uppercase">Apex_Run</span>
+                            <span class="text-[9px] font-bold text-git-blue tracking-widest uppercase">Apex</span>
                         </div>
                     </div>
-                </div>
-
-                <!-- GitHub 能量热力图 -->
-                <div class="heatmap-container mt-20 w-full pt-10 border-t border-git-border print:border-slate-200">
-                    <div class="flex justify-between items-end mb-4 px-4">
-                        <h4 class="text-[11px] font-black text-white uppercase tracking-widest flex items-center gap-2 print:text-black font-bold"><i class="fa-solid fa-layer-group text-git-green no-print"></i> 阿盛战略执行热力图 (Commit Intensity)</h4>
-                        <div class="flex gap-1 items-center text-[8px] font-mono text-slate-500 no-print">
-                            <span>低强度</span>
-                            <div class="w-3 h-3 rounded-sm bg-[#161b22]"></div>
-                            <div class="w-3 h-3 rounded-sm bg-[#0e4429]"></div>
-                            <div class="w-3 h-3 rounded-sm bg-[#39d353]"></div>
-                            <span>高强度</span>
-                        </div>
-                    </div>
-                    <div id="heatmap-grid" class="grid grid-cols-[repeat(52,1fr)] gap-1 px-4"></div>
                 </div>
             </div>
         </main>
@@ -217,35 +176,34 @@
         <!-- 3. AI 报告展示区 -->
         <section class="flex flex-col gap-6">
             <div class="flex justify-between items-center px-4 no-print">
-                <h3 class="text-[11px] font-bold text-slate-500 uppercase tracking-[0.5em] flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i> AI 决策审计报告</h3>
+                <h3 class="text-[11px] font-bold text-slate-500 uppercase tracking-[0.5em] flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i> AI 战略决策分析</h3>
                 <button onclick="generateAIReport()" id="ai-btn" class="px-10 py-4 bg-git-green hover:brightness-110 text-white rounded-xl text-[11px] font-black uppercase tracking-widest flex items-center gap-3 shadow-2xl transition-all active:scale-95">
-                    <i class="fa-solid fa-microchip"></i> 编译全方位战略蓝图
+                    <i class="fa-solid fa-file-invoice"></i> 编译最终战略蓝图
                 </button>
             </div>
             <div id="ai-output" class="hidden glass p-12 rounded-[3.5rem] shadow-2xl relative overflow-hidden print:border-none">
                 <div id="ai-text" class="prose prose-invert max-w-none print:text-black">
-                    <!-- Markdown Content -->
+                    <!-- 报告内容 -->
                 </div>
                 <div class="mt-10 pt-8 border-t border-git-border text-[9px] font-mono text-slate-600 flex justify-between no-print">
-                    <span>报告版本号: CAST-V5.4-SECURE</span>
+                    <span>文档修订: CAST-V5.6-CLEAN</span>
                     <span>生成时间: <span id="report-time"></span></span>
                 </div>
             </div>
         </section>
 
         <footer class="text-center pb-20 opacity-30 print:opacity-100 print:text-slate-400">
-            <p class="text-[11px] uppercase tracking-[1.5em] font-mono">BO STRATEGIC OS • DATA DRIVEN DECISIONS • CASTOR 2026</p>
+            <p class="text-[10px] uppercase tracking-[1.5em] font-mono">BO STRATEGIC OS • PURE DECISION MODE • CASTOR 2026</p>
         </footer>
     </div>
 
     <script>
         let currentProfile = { gender: 'Male', targetYear: 2026 };
-        const apiKey = ""; // 环境自动注入
+        const apiKey = ""; 
 
         window.onload = () => {
             initSelectors();
             updateMatrix();
-            generateHeatmap();
         };
 
         function initSelectors() {
@@ -322,36 +280,30 @@
             const res = calculateResults();
             document.getElementById('flow-number').innerText = res.py;
             document.getElementById('center-f').innerText = res.F;
-            document.getElementById('display-id').innerText = `ID: ${res.y}${res.m}${res.d} | 版本: 5.4`;
+            document.getElementById('display-id').innerText = `ID: ${res.y}${res.m}${res.d} | V5.6`;
             
-            document.getElementById('code-logic').innerText = 
-`{
-  "主体名称": "阿盛 (Castor)",
-  "核心命格": ${res.F},
-  "坐镇码": ${res.K},
-  "流年周期": ${res.py},
-  "架构状态": "${res.py === 4 ? 'STRUCTURAL_BUILD' : 'DYNAMIC_ADJUST'}"
-}`;
-
             const metrics = [
-                { label: '执行爆发力', val: res.A * 11 },
-                { label: '战略筹谋力', val: res.D * 11 },
-                { label: '生命核心能', val: res.F * 11 },
-                { label: '外部环境变', val: res.C * 11 },
-                { label: '情感直觉值', val: res.B * 11 },
-                { label: '风险控制阈', val: res.py === 4 ? 98 : 55 },
-                { label: '坐镇底蕴力', val: res.K * 11 },
-                { label: '愿景高度', val: 94 }
+                { label: '执行爆发力', val: res.A * 11, icon: 'fa-bolt' },
+                { label: '战略筹谋力', val: res.D * 11, icon: 'fa-sitemap' },
+                { label: '生命核心能', val: res.F * 11, icon: 'fa-crown' },
+                { label: '外部环境变', val: res.C * 11, icon: 'fa-earth-americas' },
+                { label: '情感直觉值', val: res.B * 11, icon: 'fa-heart' },
+                { label: '风险控制阈', val: res.py === 4 ? 98 : 55, icon: 'fa-shield-halved' },
+                { label: '坐镇底蕴力', val: res.K * 11, icon: 'fa-anchor' },
+                { label: '愿景高度', val: 94, icon: 'fa-eye' }
             ];
 
             const listContainer = document.getElementById('metrics-list');
             listContainer.innerHTML = metrics.map(m => `
-                <div class="space-y-1.5">
-                    <div class="flex justify-between items-center text-[9px] font-black uppercase">
-                        <span class="text-slate-500 tracking-widest">${m.label}</span>
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center text-[10px] font-black uppercase tracking-wider">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid ${m.icon} text-slate-500 w-4 text-center"></i>
+                            <span class="text-slate-500">${m.label}</span>
+                        </div>
                         <span class="text-git-blue font-mono">${m.val}%</span>
                     </div>
-                    <div class="h-1 w-full bg-git-bg rounded-full overflow-hidden border border-git-border">
+                    <div class="h-1.5 w-full bg-git-bg rounded-full overflow-hidden border border-git-border">
                         <div class="h-full bg-git-blue transition-all duration-1000" style="width: ${m.val}%"></div>
                     </div>
                 </div>
@@ -386,7 +338,7 @@
             const btn = document.getElementById('ai-btn');
 
             output.classList.remove('hidden');
-            textDiv.innerHTML = "<p class='animate-pulse text-git-blue mono uppercase tracking-widest'>>>> 正在编译全息审计日志...<br>>>> 注入波 (Bo) 战略核心 v5.4...</p>";
+            textDiv.innerHTML = "<p class='animate-pulse text-git-blue mono uppercase tracking-widest'>>>> 正在编译全息审计日志...<br>>>> 注入波 (Bo) 战略核心 v5.6...</p>";
             btn.disabled = true;
 
             try {
@@ -396,13 +348,13 @@
                     body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], systemInstruction: { parts: [{ text: system }] } })
                 });
                 const data = await response.json();
-                const result = data.candidates?.[0]?.content?.parts?.[0]?.text || "分析中断：核心负载过高";
+                const result = data.candidates?.[0]?.content?.parts?.[0]?.text || "分析异常：数据流中断";
                 
                 textDiv.innerHTML = marked.parse(result);
                 document.getElementById('report-time').innerText = new Date().toLocaleString();
                 output.scrollIntoView({ behavior: 'smooth' });
             } catch (err) {
-                textDiv.innerHTML = `<p class="text-git-red font-mono">ERROR_LOG: ${err.message}</p>`;
+                textDiv.innerHTML = `<p class="text-git-red font-mono">ERROR: ${err.message}</p>`;
             } finally {
                 btn.disabled = false;
             }
@@ -410,13 +362,13 @@
 
         function generateAIReport() {
             const res = calculateResults();
-            const prompt = `分析阿盛(Castor) 1980-09-30 庚申年。命格核心 ${res.F}, 坐镇 ${res.K}。流年分析目标: ${currentProfile.targetYear} (流年数 ${res.py})。
-            核心审计内容:
-            1. 针对其 2026 架构年(4) 的 U13 足球项目。重点分析如何从“散装”变为“系统”，从“人治”变为“法治”。
-            2. 针对其 5万本金在 YTL/SUNCON 的操作。指出在 4 号流年中，“耐得住寂寞”是第一要素。
-            3. 复盘前任(1983-09-05)关系终结的数字必然性(3号与8号的控制权博弈)。
-            4. 狸花猫 Money 扮演的情绪降噪角色。
-            要求：Markdown 格式，整齐划一，分节明确。`;
+            const prompt = `分析阿盛(Castor) 1980-09-30 庚申年。命格核心 ${res.F}, 坐镇 ${res.K}。流年目标: ${currentProfile.targetYear} (流年数 ${res.py})。
+            核心要求:
+            1. 2026 架构年(4) 对 U13 足球项目的系统化落地建议。
+            2. 5万本金在 YTL/SUNCON 交易中的纪律约束。
+            3. 前任(1983-09-05)关系必然性的总结（3号vs8号）。
+            4. 说明 Money 狸花猫对阿盛情绪稳定的辅助作用。
+            格式：整齐的 Markdown，分节标题，加粗重点。语气：商业战略官。`;
             callBo(prompt, "你是一位顶尖的生命密码战略审计师波 (Bo)。");
         }
 
@@ -428,26 +380,14 @@
             updateMatrix();
         }
 
-        function generateHeatmap() {
-            const grid = document.getElementById('heatmap-grid');
-            for (let i = 0; i < 52 * 7; i++) {
-                let cell = document.createElement('div');
-                let seed = Math.random();
-                let color = seed > 0.9 ? 'bg-git-green' : seed > 0.7 ? 'bg-[#26a641]' : seed > 0.4 ? 'bg-[#006d32]' : 'bg-[#161b22]';
-                cell.className = `w-full aspect-square rounded-[1px] ${color}`;
-                grid.appendChild(cell);
-            }
-        }
-
         function shareWhatsApp() {
             const res = calculateResults();
             const msg = encodeURIComponent(
-                `📋 *CASTOR STRATEGIC BLUEPRINT* v5.4\n` +
+                `📋 *阿盛战略审计报告摘要* v5.6\n` +
                 `------------------------------------\n` +
-                `🔢 核心主命: ${res.F} | 坐镇: ${res.K}\n` +
-                `⚡ 目标流年: ${currentProfile.targetYear} (流年数: ${res.py})\n` +
-                `💡 审计建议: 架构扎根年，严控风险，系统驱动。\n` +
-                `>>> 全息数据报告已打包。PDF 见随附附件。`
+                `🔢 主命核心: ${res.F} | 坐镇: ${res.K}\n` +
+                `⚡ 目标流年: ${currentProfile.targetYear} (流年 ${res.py})\n` +
+                `>>> 详细全息 PDF 已导出，请点击附件查收。`
             );
             window.open(`https://wa.me/?text=${msg}`, '_blank');
         }
