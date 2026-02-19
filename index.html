@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>全息战略审计终端 | 通用加固版 v7.1</title>
-    <!-- 依赖库 -->
+    <title>阿盛战略操作系统 | 终端 v7.2 (流控加固版)</title>
+    <!-- 核心组件库 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -32,17 +32,17 @@
         }
     </script>
     <style>
-        body { background-color: #0d1117; color: #c9d1d9; font-family: 'Inter', 'Microsoft YaHei', sans-serif; }
+        body { background-color: #0d1117; color: #c9d1d9; font-family: 'Inter', 'Microsoft YaHei', sans-serif; scroll-behavior: smooth; }
         .glass { background: rgba(22, 27, 34, 0.95); backdrop-filter: blur(20px); border: 1px solid #30363d; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        /* Markdown 内容样式优化 */
-        .prose h1 { font-size: 1.8rem; font-weight: 900; color: #58a6ff; border-bottom: 2px solid #30363d; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
-        .prose h2 { font-size: 1.4rem; font-weight: 800; color: #3fb950; margin-top: 2rem; margin-bottom: 1rem; border-left: 4px solid #3fb950; padding-left: 1rem; }
-        .prose p { line-height: 2; margin-bottom: 1.2rem; text-align: justify; color: #acbac7; }
-        .prose strong { color: #fff; border-bottom: 1px dashed #58a6ff; }
-        .prose blockquote { border-left: 4px solid #58a6ff; padding: 1rem 1.5rem; font-style: italic; color: #8b949e; background: #161b22; border-radius: 0 0.5rem 0.5rem 0; }
-        .prose ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1.5rem; color: #acbac7; }
+        /* 深度审计报告排版 */
+        .prose h1 { font-size: 2rem; font-weight: 900; color: #58a6ff; border-bottom: 2px solid #30363d; padding-bottom: 0.5rem; margin-bottom: 2rem; }
+        .prose h2 { font-size: 1.5rem; font-weight: 800; color: #3fb950; margin-top: 2.5rem; margin-bottom: 1.2rem; border-left: 5px solid #3fb950; padding-left: 1rem; }
+        .prose p { line-height: 2.2; margin-bottom: 1.5rem; text-align: justify; color: #acbac7; font-size: 1.05rem; }
+        .prose strong { color: #fff; background: rgba(56, 139, 253, 0.15); padding: 0 4px; border-radius: 4px; }
+        .prose blockquote { border-left: 4px solid #58a6ff; padding: 1.5rem; font-style: italic; color: #8b949e; background: #161b22; border-radius: 0 0.5rem 0.5rem 0; }
+        .prose ul { list-style-type: square; margin-left: 2rem; margin-bottom: 2rem; color: #acbac7; }
 
         @media print {
             .no-print { display: none !important; }
@@ -52,49 +52,40 @@
             .prose p, .prose li { color: #111 !important; }
         }
         
-        .radar-container {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            height: 450px;
-            margin: 0 auto;
-        }
-        .loader-dots::after {
-            content: '.';
-            animation: dots 1.5s steps(5, end) infinite;
-        }
+        .radar-container { position: relative; width: 100%; max-width: 500px; height: 450px; margin: 0 auto; }
+        .loader-dots::after { content: '.'; animation: dots 1.5s steps(5, end) infinite; }
         @keyframes dots { 0%, 20% { content: '.'; } 40% { content: '..'; } 60% { content: '...'; } 80%, 100% { content: ''; } }
     </style>
 </head>
 <body class="p-2 md:p-8 min-h-screen">
 
-    <!-- 系统页眉 -->
+    <!-- 顶部状态栏 -->
     <header class="max-w-7xl mx-auto mb-10 flex justify-between items-center border-b border-git-border pb-8 no-print">
         <div class="flex items-center gap-6">
-            <div class="p-4 bg-git-panel border border-git-border rounded-2xl shadow-xl shadow-blue-500/5">
-                <i class="fa-solid fa-shield-virus text-3xl text-git-blue"></i>
+            <div class="p-4 bg-git-panel border border-git-border rounded-2xl shadow-2xl">
+                <i class="fa-solid fa-microchip text-3xl text-git-blue animate-pulse"></i>
             </div>
             <div>
                 <div class="flex items-center gap-3">
-                    <h1 class="text-3xl font-black text-white tracking-tighter uppercase italic">全息战略审计终端</h1>
-                    <span class="px-2 py-0.5 bg-git-blue/10 text-git-blue text-[9px] font-bold border border-git-blue/20 rounded uppercase tracking-widest">v7.1 Reinforced</span>
+                    <h1 class="text-3xl font-black text-white tracking-tighter uppercase italic">Castor Strategic Audit</h1>
+                    <span class="px-2 py-0.5 bg-git-blue/10 text-git-blue text-[9px] font-bold border border-git-blue/20 rounded uppercase tracking-widest">v7.2 Stable</span>
                 </div>
-                <p class="text-[10px] text-slate-500 font-mono tracking-[0.3em] mt-1 uppercase">当前分析师：波 (Bo) // 指数级重试机制已激活</p>
+                <p class="text-[10px] text-slate-500 font-mono tracking-[0.3em] mt-1 uppercase">内核自愈机制已挂载 // 逻辑顾问：波 (Bo)</p>
             </div>
         </div>
         <div class="flex gap-4">
-            <button onclick="shareWhatsApp()" class="group flex items-center gap-2 px-6 py-3 bg-git-panel border border-git-border rounded-xl text-xs font-black uppercase tracking-widest hover:border-git-green transition-all shadow-lg">
-                <i class="fa-brands fa-whatsapp text-git-green text-lg"></i> <span>摘要发送</span>
+            <button onclick="shareWhatsApp()" class="flex items-center gap-2 px-6 py-3 bg-git-panel border border-git-border rounded-xl text-xs font-black uppercase hover:border-git-green transition-all shadow-lg">
+                <i class="fa-brands fa-whatsapp text-git-green text-lg"></i> <span>报告导读</span>
             </button>
-            <button onclick="window.print()" class="flex items-center gap-2 px-6 py-3 bg-git-green text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-xl hover:brightness-105 active:scale-95 transition-all">
-                <i class="fa-solid fa-file-pdf"></i> <span>打包 PDF</span>
+            <button onclick="window.print()" class="flex items-center gap-2 px-6 py-3 bg-git-green text-white rounded-xl text-xs font-black uppercase shadow-xl hover:brightness-105 active:scale-95 transition-all">
+                <i class="fa-solid fa-print"></i> <span>导出 PDF</span>
             </button>
         </div>
     </header>
 
     <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <!-- 左侧面板：对象侧写 -->
+        <!-- 左侧：身份与实时量化 -->
         <aside class="lg:col-span-4 space-y-6">
             <div class="glass p-8 rounded-[2.5rem] shadow-2xl relative overflow-hidden h-full">
                 <div class="absolute -top-12 -right-12 opacity-5 pointer-events-none">
@@ -103,7 +94,7 @@
                 
                 <div class="flex items-center gap-5 mb-10 pb-8 border-b border-git-border">
                     <div id="gender-display" class="w-20 h-20 rounded-3xl bg-git-bg border border-git-border flex items-center justify-center text-4xl shadow-inner text-git-blue">
-                        <i class="fa-solid fa-mars"></i>
+                        <i class="fa-solid fa-user-secret"></i>
                     </div>
                     <div class="flex-1">
                         <input type="text" id="userName" value="阿盛 (Castor)" oninput="updateProfileUI()" class="bg-transparent border-b border-git-border w-full text-2xl font-black text-white focus:border-git-blue outline-none py-1 mb-2">
@@ -111,14 +102,15 @@
                     </div>
                 </div>
 
-                <div class="space-y-6 mb-10">
-                    <div class="flex justify-between items-center bg-git-bg p-4 rounded-2xl border border-git-border">
-                        <span class="text-[10px] font-black text-slate-500 uppercase">主命核心 (Main)</span>
-                        <span id="main-num-box" class="text-2xl font-black text-git-blue">--</span>
+                <!-- 核心数字展示 -->
+                <div class="grid grid-cols-2 gap-4 mb-10">
+                    <div class="bg-git-bg p-5 rounded-2xl border border-git-border text-center">
+                        <span class="text-[9px] font-black text-slate-500 uppercase block mb-1">主命 (Apex)</span>
+                        <span id="main-num-box" class="text-3xl font-black text-git-blue">--</span>
                     </div>
-                    <div class="flex justify-between items-center bg-git-bg p-4 rounded-2xl border border-git-border">
-                        <span class="text-[10px] font-black text-slate-500 uppercase">坐镇底蕴 (Root)</span>
-                        <span id="root-num-box" class="text-2xl font-black text-git-green">--</span>
+                    <div class="bg-git-bg p-5 rounded-2xl border border-git-border text-center">
+                        <span class="text-[9px] font-black text-slate-500 uppercase block mb-1">坐镇 (Root)</span>
+                        <span id="root-num-box" class="text-3xl font-black text-git-green">--</span>
                     </div>
                 </div>
 
@@ -127,16 +119,16 @@
                 </div>
 
                 <div class="mt-12 pt-8 border-t border-git-border">
-                    <button onclick="resetInputs()" class="w-full py-4 bg-git-bg hover:bg-git-red/10 border border-git-border rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-git-red hover:border-git-red transition-all">
-                        <i class="fa-solid fa-arrows-rotate mr-2"></i> 重置当前分析数据
+                    <button onclick="resetSystem()" class="w-full py-4 bg-git-bg hover:bg-git-red/10 border border-git-border rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-git-red transition-all">
+                        <i class="fa-solid fa-power-off mr-2"></i> 重置并清除缓存
                     </button>
                 </div>
             </div>
         </aside>
 
-        <!-- 主工作区 -->
+        <!-- 主界面：罗盘与审计输出 -->
         <main class="lg:col-span-8 space-y-8">
-            <!-- 录入控制台 -->
+            <!-- 数据输入面板 -->
             <section class="glass p-8 rounded-[2rem] shadow-xl no-print">
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                     <div class="md:col-span-8 grid grid-cols-3 gap-6">
@@ -155,95 +147,95 @@
                     </div>
                     <div class="md:col-span-4 flex flex-col gap-4">
                         <div class="flex items-center justify-between">
-                            <span class="text-[10px] text-slate-500 font-black uppercase">性别切换</span>
+                            <span class="text-[10px] text-slate-500 font-black uppercase">性别环境</span>
                             <div class="flex bg-git-bg p-1 rounded-lg border border-git-border">
-                                <button onclick="setGender('Male')" id="btn-male" class="px-4 py-1.5 rounded-md text-[10px] font-bold bg-git-blue text-white shadow-lg transition-all">男</button>
-                                <button onclick="setGender('Female')" id="btn-female" class="px-4 py-1.5 rounded-md text-[10px] font-bold text-slate-500 transition-all">女</button>
+                                <button onclick="setGender('Male')" id="btn-male" class="px-5 py-1.5 rounded-md text-[10px] font-bold bg-git-blue text-white transition-all">男</button>
+                                <button onclick="setGender('Female')" id="btn-female" class="px-5 py-1.5 rounded-md text-[10px] font-bold text-slate-500 transition-all">女</button>
                             </div>
                         </div>
                         <div class="flex items-center justify-between pt-2 border-t border-git-border">
-                            <span class="text-[10px] text-git-green font-black uppercase">2026 流年能量</span>
-                            <div id="flow-display" class="text-2xl font-black text-git-green">--</div>
+                            <span class="text-[10px] text-git-green font-black uppercase tracking-tighter">2026 流年势能</span>
+                            <div id="flow-display" class="text-3xl font-black text-git-green leading-none">--</div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 决策雷达罗盘 -->
+            <!-- 决策矩阵雷达 -->
             <section class="glass p-10 rounded-[3.5rem] flex flex-col items-center justify-center relative min-h-[600px] shadow-2xl">
                 <div class="absolute top-10 left-12 flex items-center gap-3 opacity-20 no-print">
-                    <i class="fa-solid fa-atom text-git-blue text-xl animate-spin-slow" style="animation-duration: 10s"></i>
-                    <span class="text-[10px] font-mono tracking-[0.8em] uppercase">Castor_Logic_Matrix</span>
+                    <i class="fa-solid fa-atom text-git-blue text-xl animate-spin-slow" style="animation-duration: 15s"></i>
+                    <span class="text-[10px] font-mono tracking-[0.8em] uppercase">Castor_Core_Analysis</span>
                 </div>
 
                 <div class="radar-container">
                     <canvas id="radarChart"></canvas>
                     <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <div class="w-32 h-32 rounded-[2.5rem] bg-slate-900 border-4 border-git-border shadow-[0_0_60px_rgba(88,166,255,0.15)] flex flex-col items-center justify-center print:bg-white print:border-black">
-                            <span class="text-[10px] font-mono text-slate-500 mb-1 uppercase tracking-widest">APEX</span>
-                            <span id="center-digit" class="text-7xl font-black text-white print:text-black">?</span>
-                            <div class="h-0.5 w-12 bg-git-green my-2 opacity-30"></div>
-                            <span class="text-[8px] font-bold text-git-blue tracking-tighter uppercase">Kernel</span>
+                        <div class="w-36 h-36 rounded-[3.5rem] bg-slate-900 border-4 border-git-border shadow-[0_0_60px_rgba(88,166,255,0.2)] flex flex-col items-center justify-center print:bg-white print:border-black">
+                            <span class="text-[10px] font-mono text-slate-500 mb-1 uppercase tracking-widest">能量核</span>
+                            <span id="center-digit" class="text-8xl font-black text-white print:text-black leading-none">?</span>
+                            <div class="h-0.5 w-16 bg-git-green my-3 opacity-30"></div>
+                            <span class="text-[9px] font-bold text-git-blue tracking-widest uppercase">Kernel</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-8 px-10 w-full no-print">
-                    <div class="p-6 bg-git-bg/50 rounded-3xl border border-git-border flex items-center gap-6 border-dashed">
+                    <div class="p-6 bg-git-bg/50 rounded-3xl border border-git-border border-dashed flex items-center gap-6">
                         <div class="flex-1 space-y-2">
-                            <h4 class="text-[10px] font-black text-git-blue uppercase tracking-widest">即时审计建议 (Tips)</h4>
-                            <p id="dynamic-tip" class="text-[11px] text-slate-400 leading-relaxed"></p>
+                            <h4 class="text-[10px] font-black text-git-blue uppercase tracking-widest">动态生命审计提示 (Live Tip)</h4>
+                            <p id="dynamic-tip" class="text-xs text-slate-400 leading-relaxed italic"></p>
                         </div>
-                        <i class="fa-solid fa-brain text-2xl text-git-green opacity-40"></i>
+                        <i class="fa-solid fa-brain text-2xl text-git-green opacity-30"></i>
                     </div>
                 </div>
             </section>
 
-            <!-- 深度审计报告 -->
+            <!-- 审计报告编译出口 -->
             <section class="flex flex-col gap-8">
                 <div class="flex justify-between items-center px-4 no-print">
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-4">
                         <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i>
-                        <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.4em]">Audit Compiler v7.1</h3>
+                        <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.5em]">Strategic Report Boiler</h3>
                     </div>
-                    <button onclick="compileStrategicReport()" id="compile-btn" class="px-14 py-5 bg-git-panel border border-git-border rounded-[2rem] text-xs font-black uppercase tracking-[0.2em] text-white hover:border-git-green hover:text-git-green transition-all active:scale-95 shadow-2xl">
-                        <i class="fa-solid fa-terminal mr-3"></i> 编译深度战略分析报告 (2500字)
+                    <button onclick="compileStrategicReport()" id="compile-btn" class="px-14 py-6 bg-git-panel border border-git-border rounded-3xl text-xs font-black uppercase tracking-[0.2em] text-white hover:border-git-green hover:text-git-green transition-all active:scale-95 shadow-2xl ring-1 ring-white/5">
+                        <i class="fa-solid fa-terminal mr-3"></i> 编译全相位深度战略报告
                     </button>
                 </div>
                 
-                <div id="report-output" class="hidden glass p-12 md:p-20 rounded-[4rem] shadow-2xl relative overflow-hidden print:border-none print:shadow-none">
+                <div id="report-output" class="hidden glass p-12 md:p-24 rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.6)] relative overflow-hidden print:border-none print:shadow-none">
                     <div id="markdown-container" class="prose prose-invert max-w-none print:text-black">
                         <!-- Markdown Content Injected Here -->
                     </div>
-                    <div class="mt-20 pt-10 border-t border-git-border flex justify-between items-center no-print text-slate-600 font-mono text-[9px] uppercase tracking-widest">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-git-green animate-pulse"></span>
-                            <span>编译状态: 成功 // 时间: <span id="timestamp"></span></span>
+                    <div class="mt-20 pt-10 border-t border-git-border flex justify-between items-center no-print text-slate-600 font-mono text-[10px] uppercase tracking-widest">
+                        <div class="flex items-center gap-3">
+                            <span class="w-2.5 h-2.5 rounded-full bg-git-green shadow-[0_0_10px_rgba(63,185,80,0.5)]"></span>
+                            <span>编译状态: 稳定成功 // 记录时间: <span id="timestamp"></span></span>
                         </div>
-                        <span>Security ID: ALPHA-01-CAST</span>
+                        <span>HASH: ALPHA-99-CAST</span>
                     </div>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- 装饰 -->
-    <div class="fixed bottom-0 right-0 p-10 opacity-5 pointer-events-none no-print">
-        <i class="fa-solid fa-microchip text-9xl text-slate-500"></i>
+    <!-- 底部背景装饰 -->
+    <div class="fixed bottom-0 right-0 p-12 opacity-[0.03] pointer-events-none no-print">
+        <i class="fa-solid fa-id-badge text-[20rem]"></i>
     </div>
 
     <script>
-        // --- 核心配置与状态 ---
+        // --- 逻辑与状态配置 ---
         const config = {
             targetYear: 2026,
             gender: 'Male',
-            currentResults: {}
+            currentResults: {},
+            lastCompileTime: 0
         };
 
         let radarInstance = null;
-        const apiKey = ""; // API Key 留空，环境自动注入
+        const apiKey = ""; // API Key 自动注入
 
-        // --- 初始化逻辑 ---
         window.onload = () => {
             populateSelectors();
             refreshEngine();
@@ -271,7 +263,7 @@
             }
         }
 
-        // --- 核心算法引擎 ---
+        // --- 核心计算模型 ---
         function reduceNum(n) {
             if (!n) return 0;
             let num = Math.abs(parseInt(n));
@@ -310,11 +302,11 @@
             const by = document.getElementById('birthYear').value;
             const bm = document.getElementById('birthMonth').value;
             const bd = document.getElementById('birthDay').value;
-            document.getElementById('system-id').innerText = `SYSTEM_ID: ${by}${bm}${bd} // BRANCH: PRIME`;
+            document.getElementById('system-id').innerText = `NODE_${by}${bm}${bd} // BRANCH_PRIME`;
         }
 
         function renderUI() {
-            const { A, B, C, D, E, F, K, py, by, bm, bd } = config.currentResults;
+            const { A, B, C, D, E, F, K, py } = config.currentResults;
 
             document.getElementById('flow-display').innerText = py;
             document.getElementById('center-digit').innerText = F;
@@ -323,29 +315,29 @@
             updateProfileUI();
 
             const metrics = [
-                { label: '执行效率 (Action)', val: A * 11, icon: 'fa-bolt-lightning' },
-                { label: '逻辑层级 (Logic)', val: D * 11, icon: 'fa-sitemap' },
-                { label: '主命势能 (Kernel)', val: F * 11, icon: 'fa-microchip' },
-                { label: '风控边界 (Risk)', val: py === 4 ? 98 : 55, icon: 'fa-shield-halved' },
-                { label: '坐镇底蕴 (Stability)', val: K * 11, icon: 'fa-anchor' }
+                { label: '执行驱动力 (Execute)', val: A * 11, icon: 'fa-bolt-lightning' },
+                { label: '逻辑完整度 (Logic)', val: D * 11, icon: 'fa-layer-group' },
+                { label: '核心生命能 (Apex)', val: F * 11, icon: 'fa-microchip' },
+                { label: '防御性指标 (Risk)', val: py === 4 ? 98 : 55, icon: 'fa-shield-halved' },
+                { label: '基石稳定性 (Stability)', val: K * 11, icon: 'fa-anchor' }
             ];
 
             document.getElementById('metrics-stack').innerHTML = metrics.map(m => `
-                <div class="space-y-2">
+                <div class="space-y-3">
                     <div class="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
                         <div class="flex items-center gap-3">
                             <i class="fa-solid ${m.icon} text-slate-500 w-4 text-center"></i>
                             <span class="text-slate-400">${m.label}</span>
                         </div>
-                        <span class="text-git-blue font-mono">${m.val}%</span>
+                        <span class="text-git-blue font-mono font-bold">${m.val}%</span>
                     </div>
-                    <div class="h-1 w-full bg-git-bg rounded-full overflow-hidden border border-git-border">
-                        <div class="h-full bg-git-blue shadow-[0_0_10px_rgba(88,166,255,0.3)] transition-all duration-1000" style="width: ${m.val}%"></div>
+                    <div class="h-1.5 w-full bg-git-bg rounded-full overflow-hidden border border-git-border">
+                        <div class="h-full bg-git-blue shadow-[0_0_15px_rgba(88,166,255,0.3)] transition-all duration-1000" style="width: ${m.val}%"></div>
                     </div>
                 </div>
             `).join('');
 
-            document.getElementById('dynamic-tip').innerText = `审计发现：主命格为 ${F} 号。${py === 4 ? '当前处于流年 4 架构年，重心应放在系统化建设而非规模化扩张。' : '当前流年处于演化期，建议保持敏捷性。'}`;
+            document.getElementById('dynamic-tip').innerText = `// 深度分析：主命格 ${F} 为火性先锋。当前流年 ${py} 为架构锁定年。核心策略：通过标准化操作（SOP）将爆发力转化为持久资产。`;
 
             renderRadar([A*11, D*11, F*11, C*11, B*11, py===4?98:50, K*11, 92]);
         }
@@ -359,15 +351,16 @@
             radarInstance = new Chart(ctx, {
                 type: 'radar',
                 data: {
-                    labels: ['执行', '逻辑', '核心', '环境', '感官', '风控', '坐镇', '愿景'],
+                    labels: ['行动力', '系统逻辑', '核心势能', '外部环境', '感官直觉', '风控边界', '坐镇底蕴', '愿景高度'],
                     datasets: [{
                         data: data,
-                        backgroundColor: 'rgba(56, 139, 253, 0.1)',
+                        backgroundColor: 'rgba(56, 139, 253, 0.12)',
                         borderColor: '#58a6ff',
                         borderWidth: 3,
                         pointBackgroundColor: '#fff',
                         pointBorderColor: '#58a6ff',
-                        pointRadius: 5
+                        pointRadius: 6,
+                        pointHoverRadius: 9
                     }]
                 },
                 options: {
@@ -375,9 +368,9 @@
                     maintainAspectRatio: false,
                     scales: {
                         r: {
-                            grid: { color: 'rgba(48, 54, 61, 0.5)' },
-                            angleLines: { color: 'rgba(48, 54, 61, 0.8)' },
-                            pointLabels: { font: { size: 12, weight: 'bold' } },
+                            grid: { color: 'rgba(48, 54, 61, 0.6)' },
+                            angleLines: { color: 'rgba(48, 54, 61, 0.9)' },
+                            pointLabels: { font: { size: 12, weight: 'bold' }, padding: 20 },
                             ticks: { display: false },
                             suggestedMin: 0,
                             suggestedMax: 100
@@ -388,21 +381,23 @@
             });
         }
 
-        // --- 核心 AI 通信逻辑（带指数退避重试） ---
+        // --- 加固后的 AI 异步调度逻辑 ---
         async function fetchWithRetry(url, options, maxRetries = 5) {
             for (let i = 0; i < maxRetries; i++) {
                 try {
-                    const response = await fetch(url, options);
+                    const controller = new AbortController();
+                    const id = setTimeout(() => controller.abort(), 45000); // 45秒超时控制
+                    const response = await fetch(url, { ...options, signal: controller.signal });
+                    clearTimeout(id);
                     if (response.ok) return response;
-                    // 如果是 429 或 5xx 错误，尝试等待
                     if (response.status !== 429 && response.status < 500) break;
                 } catch (err) {
                     if (i === maxRetries - 1) throw err;
                 }
                 const delay = Math.pow(2, i) * 1000;
-                await new Promise(res => setTimeout(res, delay));
+                await new Promise(r => setTimeout(r, delay));
             }
-            throw new Error("RETRY_LIMIT_EXCEEDED: 连接受阻");
+            throw new Error("LOGIC_SERVER_BUSY: 服务器忙线或超时");
         }
 
         async function compileStrategicReport() {
@@ -412,24 +407,32 @@
             const name = document.getElementById('userName').value;
 
             btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-3"></i> <span class="loader-dots uppercase tracking-widest">正在接入智库</span>';
+            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-3"></i> <span class="loader-dots">正在编译决策包</span>';
             output.classList.remove('hidden');
-            container.innerHTML = `<p class="animate-pulse text-git-blue mono uppercase tracking-widest text-center py-24">>>> 正在连接 Bo 战略逻辑中心...<br>>>> 正在检索 ${name} 的全息命理架构...<br>>>> 正在编译 2500 字深度审计蓝图...</p>`;
+            container.innerHTML = `<div class="flex flex-col items-center justify-center py-32 space-y-6">
+                <div class="text-git-blue font-mono text-sm tracking-[0.4em] uppercase animate-pulse">>>> Accessing Bo_Strategy_Brain...</div>
+                <div class="text-slate-600 font-mono text-[10px] uppercase tracking-widest text-center">正在解析对象：${name}<br>分析模式：深度生命全息审计</div>
+                <div class="w-64 h-1 bg-git-border rounded-full overflow-hidden">
+                    <div class="h-full bg-git-green animate-progress" style="width: 70%"></div>
+                </div>
+            </div>`;
 
             const { A, B, C, D, E, F, K, py, by, bm, bd } = config.currentResults;
             
-            const prompt = `你是波(Bo)，一位高级战略审计师。请为分析对象撰写一份不少于2500字的生命数字全相位深度战略审计报告：
+            const prompt = `你是波(Bo)，阿盛(Castor)的私人战略顾问。请为以下分析对象撰写一份极其深刻、结构严整的生命数字战略审计报告：
             - 对象姓名：${name}
-            - 性别：${config.gender}
             - 生日参数：${by}-${bm}-${bd}
-            - 生命周期：2026年流年数 ${py}
-            - 性格核心：主命数 ${F}，坐镇底蕴 ${K}，行动代码 ${A}
+            - 性格模型：主命数 ${F}，坐镇底蕴 ${K}，行动代码 ${A}
+            - 关键周期：2026年处于流年势能 ${py} (架构锁定年)
             
-            报告要求：
-            1. 采用专业中文 Markdown。
-            2. 结构：性格逻辑审计（3号爆发vs9号完美）、2026流年势能深度分析（4号架构年的挑战）、具体商业/职业建议（关于SOP和锁仓）、情感/人际关系复盘策略、2026 Q1-Q4 执行路线图。
-            3. 语气：商业冷峻、穿透力强、审计官视角。分析为何主命数 ${F} 在 4 号流年中必须“减频增效”。
-            4. 字数必须充实，涵盖每一个维度的深度挖掘。不要提及宠物或猫。`;
+            报告核心审计要求：
+            1. 前言：定调2026为“系统整合”与“防守性增值”之年。
+            2. 性格审计：深入分析主命 ${F} 号带来的高频爆发力如何转化为长期优势。
+            3. 商业建议：针对 U13 足球青训项目的规范化（SOP）和 5 万本金股票交易（YTL/SUNCON）的静态防守策略。
+            4. 情感/关系复盘：分析 3 号与 8 号（如1983-09-05）之间必然的逻辑解构及分手后的“算力回收”。
+            5. 2026 执行路线图：Q1-Q4 的关键动作。
+            
+            语气：极度专业、冷峻、商业审计官风格。请用专业中文 Markdown 格式撰写。内容务必充实、深刻。`;
 
             try {
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
@@ -438,14 +441,14 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         contents: [{ parts: [{ text: prompt }] }],
-                        systemInstruction: { parts: [{ text: "你是一位精通生命数字学、金融博弈与企业架构的高级战略审计师。你的输出必须精准且富有商业前瞻性。" }] }
+                        systemInstruction: { parts: [{ text: "你是一位精通企业架构与生命数字博弈的顶尖战略顾问。你的审计结果必须具备绝对的商业可行性。" }] }
                     })
                 });
                 
                 const data = await response.json();
                 const result = data.candidates?.[0]?.content?.parts?.[0]?.text;
                 
-                if (!result) throw new Error("EMPTY_DATA_STREAM: 数据流无返回");
+                if (!result) throw new Error("DATA_STREAM_EMPTY: 审计流无返回");
                 
                 container.innerHTML = marked.parse(result);
                 document.getElementById('timestamp').innerText = new Date().toLocaleString();
@@ -453,45 +456,47 @@
                 
             } catch (err) {
                 container.innerHTML = `
-                    <div class="p-10 border border-git-red/20 bg-git-red/5 rounded-[3rem] text-center">
-                        <i class="fa-solid fa-triangle-exclamation text-4xl text-git-red mb-6"></i>
-                        <h3 class="text-git-red font-black uppercase tracking-widest mb-3">运行时异常：流中断</h3>
-                        <p class="text-xs text-slate-500 font-mono italic">Error Code: ${err.message}</p>
-                        <button onclick="compileStrategicReport()" class="mt-8 px-8 py-3 bg-git-red/10 border border-git-red/30 text-git-red rounded-xl text-[10px] font-bold uppercase hover:bg-git-red hover:text-white transition-all">重新初始化编译</button>
+                    <div class="p-16 border border-git-red/20 bg-git-red/5 rounded-[3rem] text-center">
+                        <i class="fa-solid fa-bolt-lightning text-4xl text-git-red mb-6"></i>
+                        <h3 class="text-git-red font-black uppercase tracking-widest mb-3">RUNTIME_INTERRUPT: 流异常</h3>
+                        <p class="text-sm text-slate-500 font-mono mb-8 italic">错误码: ${err.message}</p>
+                        <div class="flex gap-4 justify-center">
+                            <button onclick="compileStrategicReport()" class="px-8 py-3 bg-git-red/10 border border-git-red/30 text-git-red rounded-xl text-[10px] font-bold uppercase hover:bg-git-red hover:text-white transition-all">重新初始化</button>
+                            <button onclick="location.reload()" class="px-8 py-3 bg-git-panel border border-git-border text-slate-400 rounded-xl text-[10px] font-bold uppercase hover:text-white transition-all">强制重启系统</button>
+                        </div>
                     </div>
                 `;
             } finally {
                 btn.disabled = false;
-                btn.innerHTML = '<i class="fa-solid fa-rotate-right mr-3"></i> 重新编译审计报告';
+                btn.innerHTML = '<i class="fa-solid fa-rotate mr-3"></i> 重新编译审计报告';
             }
         }
 
         // --- 交互处理器 ---
         function setGender(g) {
             config.gender = g;
-            document.getElementById('btn-male').className = g === 'Male' ? 'px-4 py-1.5 rounded-md text-[10px] font-bold bg-git-blue text-white shadow-lg transition-all' : 'px-4 py-1.5 rounded-md text-[10px] font-bold text-slate-500';
-            document.getElementById('btn-female').className = g === 'Female' ? 'px-4 py-1.5 rounded-md text-[10px] font-bold bg-git-red text-white shadow-lg transition-all' : 'px-4 py-1.5 rounded-md text-[10px] font-bold text-slate-500';
+            document.getElementById('btn-male').className = g === 'Male' ? 'px-5 py-1.5 rounded-md text-[10px] font-bold bg-git-blue text-white shadow-lg transition-all' : 'px-5 py-1.5 rounded-md text-[10px] font-bold text-slate-500';
+            document.getElementById('btn-female').className = g === 'Female' ? 'px-5 py-1.5 rounded-md text-[10px] font-bold bg-git-red text-white shadow-lg transition-all' : 'px-5 py-1.5 rounded-md text-[10px] font-bold text-slate-500';
             document.getElementById('gender-display').innerHTML = g === 'Male' ? '<i class="fa-solid fa-mars"></i>' : '<i class="fa-solid fa-venus text-git-red"></i>';
             refreshEngine();
         }
 
-        function resetInputs() {
-            document.getElementById('userName').value = "";
-            document.getElementById('birthYear').value = 1990;
-            document.getElementById('birthMonth').value = 1;
-            document.getElementById('birthDay').value = 1;
-            refreshEngine();
+        function resetSystem() {
+            if(confirm("警告：此操作将清空所有缓冲区并重置内核，是否继续？")) {
+                location.reload();
+            }
         }
 
         function shareWhatsApp() {
             const name = document.getElementById('userName').value;
             const res = config.currentResults;
             const msg = encodeURIComponent(
-                `📊 *${name} 生命战略审计简报* 📊\n` +
+                `📋 *${name} 生命战略审计简报* (v7.2)\n` +
                 `------------------------------------\n` +
-                `🔢 核心主命: ${res.F} | 坐镇码: ${res.K}\n` +
-                `⚡ 2026年流年势能: ${res.py}\n` +
-                `>>> 详细量化 PDF 请查看随附附件。`
+                `🔢 主命核心: ${res.F} | 坐镇底蕴: ${res.K}\n` +
+                `⚡ 2026年流年: ${res.py} (架构锁定年)\n` +
+                `💡 核心建议：建立 SOP、锁死变量、防御性增长。\n` +
+                `>>> 详细量化 PDF 请查收随附附件。`
             );
             window.open(`https://wa.me/?text=${msg}`, '_blank');
         }
