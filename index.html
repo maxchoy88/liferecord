@@ -1,452 +1,492 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { 
-  Zap, Shield, User, Heart, TrendingUp, 
-  Crown, Compass, Briefcase, Share2, 
-  Calculator, Sparkles, MessageSquare, Loader2, RefreshCw, 
-  BarChart3, Settings, UserPlus, Info, Calendar,
-  LineChart, Target, Edit3, Mars, Venus, Printer, MessageCircle,
-  FileText, Activity, Hash, Binary, ChevronRight, Layout,
-  PackageCheck, Hexagon, Binary as BinaryIcon, Gauge, Terminal,
-  Code2, GitBranch, Github, Boxes
-} from 'lucide-react';
-
-/**
- * App - 战略级生命全息终端 v3.9 (GitHub 方程式版)
- * 适配：阿盛 (Castor) | AI 顾问：波 (Bo)
- * 核心：将生命密码转化为开发者逻辑，引入 GitHub 贡献热力图与代码化方程式。
- */
-
-const App = () => {
-  // --- 核心计算引擎 (Pythagorean Algorithm) ---
-  const reduceNum = (n) => {
-    if (!n) return 0;
-    let num = Math.abs(parseInt(n));
-    while (num > 9) {
-      num = String(num).split('').reduce((acc, curr) => acc + parseInt(curr), 0);
-    }
-    return num;
-  };
-
-  const calculateFullMatrix = (y, m, d, analysisYear) => {
-    const dStr = String(d).padStart(2, '0');
-    const mStr = String(m).padStart(2, '0');
-    const yStr = String(y);
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Castor Strategic Matrix v5.0</title>
+    <!-- 引入 Tailwind CSS 确保样式整齐 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Chart.js 制作数据化图表 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 引入 FontAwesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    const d1 = parseInt(dStr[0]) || 0; const d2 = parseInt(dStr[1]) || 0;
-    const m1 = parseInt(mStr[0]) || 0; const m2 = parseInt(mStr[1]) || 0;
-    const yr1 = parseInt(yStr[0]) || 0; const yr2 = parseInt(yStr[1]) || 0;
-    const yr3 = parseInt(yStr[2]) || 0; const yr4 = parseInt(yStr[3]) || 0;
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'git-bg': '#0d1117',
+                        'git-border': '#30363d',
+                        'git-blue': '#58a6ff',
+                        'git-green': '#3fb950',
+                        'git-red': '#f85149'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800&family=Inter:wght@400;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #0d1117; color: #c9d1d9; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .glass { background: rgba(22, 27, 34, 0.8); backdrop-filter: blur(12px); border: 1px solid #30363d; }
+        .heatmap-cell { width: 12px; height: 12px; border-radius: 2px; }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+            .glass { background: white !important; border: 1px solid #ccc !important; box-shadow: none !important; color: black !important; }
+        }
+        /* 隐藏滚动条但保留功能 */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="p-4 md:p-8 min-h-screen antialiased selection:bg-git-green selection:text-white">
 
-    const A = reduceNum(d1 + d2); 
-    const B = reduceNum(m1 + m2); 
-    const C = reduceNum(reduceNum(yr1 + yr2) + reduceNum(yr3 + yr4)); 
-    const D = reduceNum(A + B); 
-    const E = reduceNum(B + C); 
-    const F = reduceNum(D + E); 
-    const G = reduceNum(A + D); 
-    const H = reduceNum(C + E); 
-    const I = reduceNum(D + F); 
-    const J = reduceNum(E + F); 
-    const K = reduceNum(I + J); 
+    <div class="max-w-6xl mx-auto flex flex-col gap-8">
+        
+        <!-- Header: GitHub Pro Style -->
+        <header class="flex justify-between items-center border-b border-git-border pb-6 no-print">
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-slate-900 border border-git-border rounded-xl text-git-blue shadow-inner">
+                    <i class="fa-brands fa-github text-3xl"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-xl font-bold text-white tracking-tight">castor-life-v5.0-stable</h1>
+                        <span class="text-[10px] font-bold border border-git-green px-2 py-0.5 rounded-full text-git-green bg-git-green/10 uppercase">Production</span>
+                    </div>
+                    <p class="text-xs text-slate-500 font-mono mt-1 flex items-center gap-2 uppercase tracking-tighter">
+                        <i class="fa-solid fa-code-branch text-[10px]"></i> origin / holographic-unicode-safe
+                    </p>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="shareWhatsApp()" class="flex items-center gap-2 px-4 py-2 bg-[#21262d] border border-git-border rounded-lg text-sm font-semibold hover:border-slate-400 transition-all">
+                    <i class="fa-brands fa-whatsapp text-git-green text-lg"></i> <span class="hidden sm:inline">WhatsApp</span>
+                </button>
+                <button onclick="window.print()" class="flex items-center gap-2 px-4 py-2 bg-git-green border border-[#2ea44f] text-white rounded-lg text-sm font-semibold hover:bg-[#2ea44f] transition-all shadow-md">
+                    <i class="fa-solid fa-print"></i> <span class="hidden sm:inline">PDF Report</span>
+                </button>
+            </div>
+        </header>
 
-    const personalYear = reduceNum(parseInt(analysisYear) + reduceNum(m) + reduceNum(d));
+        <!-- 1. 控制台配置面板 -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 no-print">
+            <div class="lg:col-span-8 glass p-6 rounded-2xl shadow-xl">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center gap-2 text-white font-bold text-[10px] uppercase tracking-widest"><i class="fa-solid fa-terminal text-slate-500"></i> SYSTEM.CONFIG</div>
+                    <div id="gender-toggle" class="flex bg-git-bg p-1 rounded-lg border border-git-border">
+                        <button onclick="setGender('Male')" id="btn-male" class="px-4 py-1.5 rounded-md text-[10px] font-bold bg-git-blue text-white shadow-lg transition-all">MALE</button>
+                        <button onclick="setGender('Female')" id="btn-female" class="px-4 py-1.5 rounded-md text-[10px] font-bold text-slate-500 transition-all">FEMALE</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="space-y-1">
+                        <span class="text-[9px] text-slate-500 font-bold uppercase ml-1">Birth Year</span>
+                        <select id="birthYear" onchange="updateMatrix()" class="w-full bg-git-bg border border-git-border rounded-xl p-3 text-sm font-black text-white outline-none focus:border-git-blue"></select>
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-[9px] text-slate-500 font-bold uppercase ml-1">Month</span>
+                        <select id="birthMonth" onchange="updateMatrix()" class="w-full bg-git-bg border border-git-border rounded-xl p-3 text-sm font-black text-white outline-none focus:border-git-blue"></select>
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-[9px] text-slate-500 font-bold uppercase ml-1">Day</span>
+                        <select id="birthDay" onchange="updateMatrix()" class="w-full bg-git-bg border border-git-border rounded-xl p-3 text-sm font-black text-white outline-none focus:border-git-blue"></select>
+                    </div>
+                </div>
+                <div class="pt-4 border-t border-git-border">
+                    <span class="text-[9px] text-git-green font-bold uppercase tracking-widest mb-4 block px-1">Target Cycle Commitment</span>
+                    <div id="year-selector" class="flex gap-2 overflow-x-auto no-scrollbar py-1"></div>
+                </div>
+            </div>
+            <div class="lg:col-span-4 glass p-6 rounded-2xl flex flex-col justify-center items-center text-center">
+                <span class="text-[10px] font-bold text-slate-500 uppercase mb-2 tracking-widest">Flow Intensity</span>
+                <div id="flow-number" class="text-8xl font-black text-git-green tracking-tighter mb-2">--</div>
+                <div id="flow-label" class="text-[9px] font-mono text-git-green uppercase px-3 py-1 bg-git-green/10 rounded-full border border-git-green/20">Init...</div>
+            </div>
+        </section>
 
-    // 数据化雷达指标
-    const metrics = [
-      { label: 'Core Energy', val: F * 11, color: 'bg-indigo-500' },
-      { label: 'Strategic Logic', val: D * 11, color: 'bg-emerald-500' },
-      { label: 'Execution Speed', val: A * 11, color: 'bg-rose-500' },
-      { label: 'Environment', val: C * 11, color: 'bg-cyan-500' },
-      { label: 'Emotional Sync', val: B * 11, color: 'bg-amber-500' },
-      { label: 'Risk Control', val: personalYear === 4 ? 92 : 55, color: 'bg-blue-500' },
-      { label: 'Future Upside', val: H * 11, color: 'bg-purple-500' },
-      { label: 'Root Sitting', val: K * 11, color: 'bg-orange-500' }
-    ];
+        <!-- 2. 全息报告主体 -->
+        <main id="report-content" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            
+            <!-- 左侧面板 -->
+            <div class="lg:col-span-4 flex flex-col gap-6">
+                <!-- 身份摘要 -->
+                <div class="glass p-8 rounded-[2rem] shadow-2xl print:bg-white print:text-black">
+                    <div class="flex items-center gap-4 mb-8 pb-8 border-b border-git-border print:border-slate-200">
+                        <div id="avatar-box" class="w-16 h-16 rounded-2xl bg-git-bg flex items-center justify-center border border-git-border print:bg-slate-50 text-2xl">
+                            <i class="fa-solid fa-mars text-git-blue"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h2 id="display-name" class="text-2xl font-black tracking-tight print:text-black">阿盛 (Castor)</h2>
+                            <p id="display-id" class="text-[9px] text-slate-500 font-mono uppercase mt-2 tracking-widest leading-none"></p>
+                        </div>
+                    </div>
+                    <div id="metrics-list" class="space-y-5">
+                        <!-- Metrics will be injected here -->
+                    </div>
+                    
+                    <!-- Money Factor -->
+                    <div class="mt-10 p-5 bg-git-bg rounded-xl border border-rose-500/20 print:bg-slate-50">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-[10px] font-black text-rose-400 uppercase flex items-center gap-2"><i class="fa-solid fa-cat"></i> Biological Buffer: Money</span>
+                            <span class="text-[9px] font-mono text-rose-300">STABLE</span>
+                        </div>
+                        <div class="flex gap-1">
+                            <div class="h-4 flex-1 bg-rose-500/30 rounded-sm"></div>
+                            <div class="h-4 flex-1 bg-rose-500/30 rounded-sm"></div>
+                            <div class="h-4 flex-1 bg-rose-500/30 rounded-sm"></div>
+                            <div class="h-4 flex-1 bg-rose-500/30 rounded-sm"></div>
+                            <div class="h-4 flex-1 bg-git-bg rounded-sm border border-git-border"></div>
+                        </div>
+                        <p class="text-[9px] text-slate-500 mt-3 italic text-center uppercase tracking-tighter">"Anchor Frequency for High-Freq Trading"</p>
+                    </div>
+                </div>
 
-    // 代码化展示
-    const codeSnippet = `
-// Castor Life Matrix Logic v3.9
-const LifeMatrix = {
-  profile: "${y}-${m}-${d}",
-  apex: ${F}, // 主命数
-  sitting: ${K}, // 坐镇码
-  cycle: ${personalYear}, // ${analysisYear}流年
-  getStrategy: () => {
-    if (cycle === 4) return "STRUCTURAL_BUILD";
-    return "AGILE_REFACTOR";
-  }
+                <!-- 方程式代码块 -->
+                <div class="glass p-6 rounded-2xl print:bg-slate-50">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-code text-git-blue"></i>
+                        <span class="text-[10px] font-black text-git-blue uppercase tracking-widest">matrix_kernel.json</span>
+                    </div>
+                    <pre id="code-logic" class="text-[11px] font-mono leading-[1.8] text-[#c9d1d9] bg-git-bg p-5 rounded-xl border border-git-border overflow-x-auto print:text-black print:bg-white"></pre>
+                </div>
+            </div>
+
+            <!-- 右侧大面板：八角雷达与热力图 -->
+            <div class="lg:col-span-8 glass p-10 rounded-[3rem] flex flex-col items-center justify-center relative print:bg-white print:border-slate-300">
+                <div class="absolute top-10 left-12 flex items-center gap-2 opacity-20 no-print">
+                    <i class="fa-solid fa-compass animate-spin-slow"></i>
+                    <span class="text-[10px] font-mono tracking-[0.6em]">HOLOGRAPHIC_DECISION_ENGINE</span>
+                </div>
+
+                <!-- 八角数据罗盘容器 -->
+                <div class="relative w-[500px] h-[500px] flex items-center justify-center">
+                    <canvas id="radarChart"></canvas>
+                    <!-- 中心 APEX 装饰 -->
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div class="w-32 h-32 rounded-[2.5rem] bg-slate-900 border-4 border-git-border shadow-2xl flex flex-col items-center justify-center print:bg-white print:text-black">
+                            <span class="text-[10px] font-mono text-slate-500 mb-1">MAIN_NODE</span>
+                            <span id="center-f" class="text-7xl font-black leading-none">3</span>
+                            <div class="h-0.5 w-12 bg-git-green my-2"></div>
+                            <span class="text-[9px] font-bold text-git-blue tracking-widest uppercase">Exec.Init()</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GitHub Heatmap -->
+                <div class="mt-16 w-full pt-10 border-t border-git-border print:border-slate-200">
+                    <div class="flex justify-between items-end mb-4 px-4">
+                        <h4 class="text-[11px] font-black text-white uppercase tracking-widest flex items-center gap-2 print:text-black"><i class="fa-solid fa-layer-group text-git-green"></i> Strategic Commitment Heatmap</h4>
+                        <div class="flex gap-1 items-center no-print text-[8px] font-mono">
+                            <span>Less</span>
+                            <div class="w-3 h-3 rounded-sm bg-[#161b22]"></div>
+                            <div class="w-3 h-3 rounded-sm bg-[#0e4429]"></div>
+                            <div class="w-3 h-3 rounded-sm bg-[#006d32]"></div>
+                            <div class="w-3 h-3 rounded-sm bg-[#26a641]"></div>
+                            <div class="w-3 h-3 rounded-sm bg-[#39d353]"></div>
+                            <span>More</span>
+                        </div>
+                    </div>
+                    <div id="heatmap-grid" class="grid grid-cols-[repeat(52,1fr)] gap-1 overflow-hidden px-4">
+                        <!-- Heatmap generated by JS -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- AI 战略报告区域 -->
+        <section class="flex flex-col gap-6 no-print">
+            <div class="flex justify-between items-center px-4">
+                <h3 class="text-[11px] font-bold text-slate-500 uppercase tracking-[0.5em] flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i> Bo AI Strategic Auditor</h3>
+                <button onclick="generateAIReport()" id="ai-btn" class="px-10 py-3.5 bg-git-green hover:bg-[#2ea44f] text-white rounded-xl text-[11px] font-black uppercase tracking-widest flex items-center gap-3 shadow-2xl transition-all active:scale-95">
+                    <i class="fa-solid fa-terminal"></i> COMPILE_STRATEGY
+                </button>
+            </div>
+            <div id="ai-output" class="hidden glass p-12 rounded-[3rem] shadow-2xl relative overflow-hidden">
+                <div class="flex items-center gap-3 mb-10 text-git-blue pb-6 border-b border-git-border">
+                    <i class="fa-solid fa-file-code text-2xl"></i>
+                    <div>
+                        <h3 class="text-xl font-black uppercase tracking-widest">master-strategic-log.md</h3>
+                        <p class="text-[10px] text-slate-500 font-mono tracking-[0.2em]">Compiler: Gemini-2.5-Bo | Version 5.0</p>
+                    </div>
+                </div>
+                <div id="ai-text" class="text-[16px] leading-[2.1] border-l-4 border-git-border pl-10 italic whitespace-pre-wrap font-serif">
+                    <!-- AI content -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Command Terminal -->
+        <section class="glass p-10 rounded-[3rem] shadow-2xl no-print relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-git-blue via-git-green to-git-red opacity-50"></div>
+            <div class="flex gap-4">
+                <span class="text-git-blue font-black text-xl mt-4">$</span>
+                <input type="text" id="chat-input" placeholder="输入查询指令, 如: git analyse --risk --year 2026..." class="flex-grow bg-transparent border-none py-4 text-lg font-mono text-white focus:ring-0 outline-none">
+                <button onclick="handleTerminalChat()" class="px-12 bg-[#21262d] hover:bg-[#30363d] border border-git-border text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all">RUN</button>
+            </div>
+        </section>
+
+        <footer class="text-center pb-16 opacity-30 print:opacity-100 print:text-slate-400 print:mt-20">
+            <p class="text-[11px] uppercase tracking-[1em] font-mono">BO MATRIX TERMINAL • PRECISION STRATEGY • CASTOR 2026 EDITION</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- DATA STORE ---
+        let currentProfile = {
+            name: 'Castor 阿盛',
+            gender: 'Male',
+            birthYear: 1980,
+            birthMonth: 9,
+            birthDay: 30,
+            targetYear: 2026
+        };
+
+        const apiKey = ""; // API key 留空，环境会自动注入
+
+        // --- UI INITIALIZATION ---
+        window.onload = () => {
+            initSelectors();
+            updateMatrix();
+            generateHeatmap();
+        };
+
+        function initSelectors() {
+            const ySelect = document.getElementById('birthYear');
+            const mSelect = document.getElementById('birthMonth');
+            const dSelect = document.getElementById('birthDay');
+            const flowSelect = document.getElementById('year-selector');
+
+            for (let i = 1950; i <= 2026; i++) {
+                let opt = new Option(i, i);
+                if (i === 1980) opt.selected = true;
+                ySelect.add(opt);
+            }
+            for (let i = 1; i <= 12; i++) {
+                let opt = new Option(i, i);
+                if (i === 9) opt.selected = true;
+                mSelect.add(opt);
+            }
+            for (let i = 1; i <= 31; i++) {
+                let opt = new Option(i, i);
+                if (i === 30) opt.selected = true;
+                dSelect.add(opt);
+            }
+
+            [2024, 2025, 2026, 2027, 2028, 2029, 2030].forEach(y => {
+                let btn = document.createElement('button');
+                btn.className = `shrink-0 px-5 py-2.5 rounded-xl text-xs font-black transition-all border ${y === 2026 ? 'bg-[#388bfd]/20 border-git-blue text-git-blue' : 'bg-[#0d1117] border-git-border text-slate-500'}`;
+                btn.innerText = y;
+                btn.onclick = () => setTargetYear(y, btn);
+                flowSelect.appendChild(btn);
+            });
+        }
+
+        // --- CORE NUMEROLOGY LOGIC ---
+        function reduceNum(n) {
+            if (!n) return 0;
+            let num = Math.abs(parseInt(n));
+            while (num > 9) {
+                num = String(num).split('').reduce((acc, curr) => acc + parseInt(curr), 0);
+            }
+            return num;
+        }
+
+        function calculateResults() {
+            const y = parseInt(document.getElementById('birthYear').value);
+            const m = parseInt(document.getElementById('birthMonth').value);
+            const d = parseInt(document.getElementById('birthDay').value);
+            const ty = currentProfile.targetYear;
+
+            const dStr = String(d).padStart(2, '0');
+            const mStr = String(m).padStart(2, '0');
+            const yStr = String(y);
+
+            const A = reduceNum(parseInt(dStr[0]) + parseInt(dStr[1]));
+            const B = reduceNum(parseInt(mStr[0]) + parseInt(mStr[1]));
+            const C = reduceNum(reduceNum(parseInt(yStr[0]) + parseInt(yStr[1])) + reduceNum(parseInt(yStr[2]) + parseInt(yStr[3])));
+
+            const D = reduceNum(A + B);
+            const E = reduceNum(B + C);
+            const F = reduceNum(D + E);
+
+            const G = reduceNum(A + D);
+            const H = reduceNum(C + E);
+            const I = reduceNum(D + F);
+            const J = reduceNum(E + F);
+            const K = reduceNum(I + J);
+
+            const py = reduceNum(ty + reduceNum(m) + reduceNum(d));
+
+            return { A, B, C, D, E, F, G, H, I, J, K, py };
+        }
+
+        let chartInstance = null;
+
+        function updateMatrix() {
+            const res = calculateResults();
+            
+            // Update Flow Info
+            document.getElementById('flow-number').innerText = res.py;
+            document.getElementById('flow-label').innerText = res.py === 4 ? "Architectural Sync" : "Flow Shifting";
+            document.getElementById('center-f').innerText = res.F;
+            document.getElementById('display-id').innerText = `ID: ${document.getElementById('birthYear').value}${document.getElementById('birthMonth').value}${document.getElementById('birthDay').value} | BRANCH: MAIN`;
+
+            // Update Logic Panel
+            document.getElementById('code-logic').innerText = 
+`const LifeMatrix = {
+  apex_node: ${res.F}, // 主命数
+  base_sitting: ${res.K}, // 坐镇
+  flow_cycle: ${res.py}, // 流年
+  status: "${res.py === 4 ? 'STABLE_BUILD' : 'REFACTORING'}",
+  version: "5.0.0-stable"
 };`;
 
-    return { A, B, C, D, E, F, G, H, I, J, K, personalYear, metrics, codeSnippet };
-  };
+            // Data for Radar
+            const metrics = [
+                { label: '执行速度', val: res.A * 11 },
+                { label: '战略逻辑', val: res.D * 11 },
+                { label: '核心能量', val: res.F * 11 },
+                { label: '环境适应', val: res.C * 11 },
+                { label: '感官直觉', val: res.B * 11 },
+                { label: '风险控制', val: res.py === 4 ? 98 : 50 },
+                { label: '未来增益', val: res.H * 11 },
+                { label: '坐镇底蕴', val: res.K * 11 }
+            ];
 
-  // --- 状态管理 ---
-  const [profile, setProfile] = useState({
-    name: 'Castor 阿盛',
-    gender: 'Male',
-    birthYear: 1980,
-    birthMonth: 9,
-    birthDay: 30,
-    targetYear: 2026 
-  });
-  
-  const [isEditingName, setIsEditingName] = useState(false);
-  const [aiLoading, setAiLoading] = useState(false);
-  const [aiResponse, setAiResponse] = useState('');
-  const [chatInput, setChatInput] = useState('');
-
-  const results = useMemo(() => {
-    return calculateFullMatrix(profile.birthYear, profile.birthMonth, profile.birthDay, profile.targetYear);
-  }, [profile.birthYear, profile.birthMonth, profile.birthDay, profile.targetYear]);
-
-  const flowYears = [2024, 2025, 2026, 2027, 2028, 2029, 2030];
-  const birthYears = Array.from({ length: 80 }, (_, i) => 1950 + i);
-  const months = Array.from({ length: 12 }, (_, i) => i + 1);
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
-
-  // --- AI 与 逻辑函数 ---
-  const callGemini = async (prompt, systemPrompt = "") => {
-    setAiLoading(true);
-    const apiKey = ""; 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          systemInstruction: { parts: [{ text: systemPrompt }] }
-        })
-      });
-      const data = await response.json();
-      const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-      setAiResponse(typeof text === 'object' ? JSON.stringify(text) : String(text || ""));
-    } catch (err) { setAiResponse(`[SYSTEM_ERROR]: ${err.message}`); }
-    finally { setAiLoading(false); }
-  };
-
-  const handleChat = () => {
-    if (!chatInput.trim() || !results) return;
-    const prompt = `[CASTOR_QUERY]: ${chatInput}. Context: Main ${results.F}, Root ${results.K}, Year ${profile.targetYear}.`;
-    callGemini(prompt, "你是一位顶尖的战略分析师波 (Bo)，请以结构化的方式回答。");
-    setChatInput('');
-  };
-
-  const handleAiAnalyze = () => {
-    const prompt = `请基于 GitHub 方程式逻辑分析 1980-09-30 男性的全息命盘。流年 4 对其 2026 年青训开工的影响，以及 Money (狸花猫) 如何作为情绪 Buffer。`;
-    callGemini(prompt, "请提供一份带有代码块风格和 Git Log 风格的战略报告。");
-  };
-
-  const handleWhatsAppShare = () => {
-    const message = encodeURIComponent(
-      `👨‍💻 *CASTOR MATRIX LOGS* v3.9\n` +
-      `-----------------------------------\n` +
-      `📦 Repo: Life-Matrix-0930\n` +
-      `🔢 Main_Node: ${results.F} | Sitting_Core: ${results.K}\n` +
-      `⚡ Year_Status: ${results.personalYear} (Structural_Phase)\n` +
-      `-----------------------------------\n` +
-      `>>> 报告已由 Bo AI 编译完成。`
-    );
-    window.open(`https://wa.me/?text=${message}`, '_blank');
-  };
-
-  // --- GitHub 风格辅助 ---
-  const getOctagonPoints = (cx, cy, r) => {
-    let pts = [];
-    for (let i = 0; i < 8; i++) {
-      let angle = (i * 45 - 90) * (Math.PI / 180);
-      pts.push(`${cx + r * Math.cos(angle)},${cy + r * Math.sin(angle)}`);
-    }
-    return pts.join(' ');
-  };
-
-  const getRadarPoints = (cx, cy, maxR, metrics) => {
-    let pts = [];
-    metrics.forEach((m, i) => {
-      let r = (m.val / 100) * maxR;
-      let angle = (i * 45 - 90) * (Math.PI / 180);
-      pts.push(`${cx + r * Math.cos(angle)},${cy + r * Math.sin(angle)}`);
-    });
-    return pts.join(' ');
-  };
-
-  return (
-    <div className="min-h-screen bg-[#0d1117] text-[#c9d1d9] p-4 md:p-8 font-sans selection:bg-[#238636] selection:text-white antialiased">
-      <div className="max-w-6xl mx-auto flex flex-col gap-6">
-        
-        {/* Header - GitHub Style */}
-        <div className="flex justify-between items-center border-b border-[#30363d] pb-6 no-print">
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-[#161b22] border border-[#30363d] rounded-xl text-[#58a6ff]">
-              <Github size={24} />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-white flex items-center gap-2">
-                castor-life-matrix <span className="text-xs font-normal border border-[#30363d] px-2 py-0.5 rounded-full text-[#8b949e]">Public</span>
-              </h1>
-              <p className="text-xs text-[#8b949e] font-mono mt-1 uppercase tracking-tighter italic">master / equation-v3.9-stable</p>
-            </div>
-          </div>
-          <div className="flex gap-2">
-            <button onClick={handleWhatsAppShare} className="flex items-center gap-2 px-4 py-2 bg-[#21262d] border border-[#30363d] rounded-lg text-sm font-semibold hover:bg-[#30363d] transition-all">
-              <Share2 size={14} className="text-[#58a6ff]"/> Share
-            </button>
-            <button onClick={() => window.print()} className="flex items-center gap-2 px-4 py-2 bg-[#238636] border border-[#2ea44f] text-white rounded-lg text-sm font-semibold hover:bg-[#2ea44f] transition-all">
-              <Printer size={14} /> Export Report
-            </button>
-            <button onClick={() => setIsEditingName(!isEditingName)} className="p-2.5 bg-[#21262d] border border-[#30363d] rounded-lg text-[#8b949e] hover:text-white">
-              <Edit3 size={18} />
-            </button>
-          </div>
-        </div>
-
-        {/* 打印专用 */}
-        <div className="hidden only-print text-center border-b border-slate-900 pb-10 mb-10">
-          <h1 className="text-3xl font-black text-black uppercase tracking-widest">CASTOR STRATEGIC LOGS (MATRIX V3.9)</h1>
-          <p className="text-sm font-mono mt-2 text-slate-600 italic">"Algorithmic Approach to Personal Flow Control"</p>
-        </div>
-
-        {/* 控制中心 */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 no-print">
-          {/* 左：参数 */}
-          <div className="lg:col-span-8 bg-[#161b22] p-6 rounded-2xl border border-[#30363d]">
-             <div className="flex justify-between items-center mb-6">
-                <div className="flex items-center gap-2 text-white font-bold text-xs uppercase tracking-widest"><Terminal size={14} className="text-[#8b949e]"/> Input Parameters</div>
-                <div className="flex bg-[#0d1117] p-1 rounded-lg border border-[#30363d]">
-                  <button onClick={() => setProfile({...profile, gender: 'Male'})} className={`px-4 py-1.5 rounded-md text-[10px] font-bold transition-all ${profile.gender === 'Male' ? 'bg-[#58a6ff] text-white' : 'text-[#8b949e]'}`}>MALE</button>
-                  <button onClick={() => setProfile({...profile, gender: 'Female'})} className={`px-4 py-1.5 rounded-md text-[10px] font-bold transition-all ${profile.gender === 'Female' ? 'bg-[#f85149] text-white' : 'text-[#8b949e]'}`}>FEMALE</button>
+            // Render Metrics List (Left Panel)
+            const listContainer = document.getElementById('metrics-list');
+            listContainer.innerHTML = metrics.map(m => `
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center text-[10px] font-bold uppercase">
+                        <span class="text-slate-500">${m.label}</span>
+                        <span class="text-white">${m.val}%</span>
+                    </div>
+                    <div class="h-1 w-full bg-git-bg rounded-full overflow-hidden border border-git-border">
+                        <div class="h-full bg-git-blue transition-all duration-1000" style="width: ${m.val}%"></div>
+                    </div>
                 </div>
-             </div>
-             <div className="grid grid-cols-3 gap-3 mb-6">
-                {['Year', 'Month', 'Day'].map((label, i) => (
-                  <select key={label} value={profile[i === 0 ? 'birthYear' : i === 1 ? 'birthMonth' : 'birthDay']} onChange={(e) => setProfile({...profile, [i === 0 ? 'birthYear' : i === 1 ? 'birthMonth' : 'birthDay']: parseInt(e.target.value)})} className="bg-[#0d1117] border border-[#30363d] rounded-xl p-3 text-sm font-black text-white focus:border-[#58a6ff] outline-none">
-                    {[birthYears, months, days][i].map(o => <option key={o} value={o}>{o}</option>)}
-                  </select>
-                ))}
-             </div>
-             <div className="flex gap-2 overflow-x-auto no-scrollbar pt-4 border-t border-[#30363d]">
-                {flowYears.map(y => (
-                  <button key={y} onClick={() => setProfile({...profile, targetYear: y})} className={`shrink-0 px-5 py-2 rounded-lg text-xs font-black transition-all border ${profile.targetYear === y ? 'bg-[#388bfd]/20 border-[#388bfd] text-[#58a6ff]' : 'bg-[#0d1117] border-[#30363d] text-[#8b949e]'}`}>{y}</button>
-                ))}
-             </div>
-          </div>
-          {/* 右：流年 Commit */}
-          <div className="lg:col-span-4 bg-[#161b22] p-6 rounded-2xl border border-[#30363d] flex flex-col justify-center items-center">
-            <span className="text-[10px] font-bold text-[#8b949e] uppercase mb-2">Cycle Commit Intensity</span>
-            <div className="text-7xl font-black text-[#58a6ff] tracking-tighter mb-2">{results.personalYear}</div>
-            <div className="text-[10px] font-mono text-[#3fb950] bg-[#3fb950]/10 px-3 py-1 rounded-full">+ Structural Build Active</div>
-          </div>
-        </div>
+            `).join('');
 
-        {/* 核心报告层 */}
-        <div id="report-content" className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          
-          {/* 左：代码化摘要 */}
-          <div className="lg:col-span-4 flex flex-col gap-6">
-            <div className="bg-[#161b22] p-6 rounded-2xl border border-[#30363d] print:bg-white print:border-slate-300 print:text-black">
-               <div className="flex items-center gap-3 mb-6 pb-6 border-b border-[#30363d] print:border-slate-200">
-                 <div className="w-12 h-12 rounded-xl bg-[#0d1117] flex items-center justify-center border border-[#30363d] print:bg-slate-100">
-                   {profile.gender === 'Male' ? <Mars className="text-[#58a6ff]" size={24}/> : <Venus className="text-[#f85149]" size={24}/>}
-                 </div>
-                 <div className="flex-1">
-                    {isEditingName ? <input type="text" value={profile.name} onChange={(e) => setProfile({...profile, name: e.target.value})} onBlur={() => setIsEditingName(false)} className="bg-black border border-[#58a6ff] rounded px-2 py-1 text-lg font-black text-white w-full" autoFocus /> : <h2 className="text-xl font-bold text-white print:text-black">{profile.name}</h2>}
-                    <p className="text-[9px] text-[#8b949e] font-mono uppercase mt-1 tracking-widest leading-none">Branch: main / Profile-ID: 0930</p>
-                 </div>
-               </div>
-               <div className="space-y-4">
-                  <div className="p-4 bg-[#0d1117] rounded-xl border border-[#30363d] print:bg-slate-50">
-                    <div className="flex items-center gap-2 text-[9px] font-bold text-[#8b949e] uppercase mb-3"><Hash size={10}/> Matrix Constants</div>
-                    <div className="grid grid-cols-2 gap-4">
-                       <div className="flex flex-col">
-                         <span className="text-[8px] text-[#8b949e]">APEX_FACTOR</span>
-                         <span className="text-2xl font-black text-[#58a6ff]">{results.F}</span>
-                       </div>
-                       <div className="flex flex-col border-l border-[#30363d] pl-4">
-                         <span className="text-[8px] text-[#8b949e]">SITTING_CORE</span>
-                         <span className="text-2xl font-black text-[#f85149]">{results.K}</span>
-                       </div>
-                    </div>
-                  </div>
-                  
-                  {/* 代码块方程式 */}
-                  <div className="relative group">
-                    <div className="absolute top-2 right-3 text-[8px] text-[#8b949e] uppercase">Source Logic</div>
-                    <pre className="p-4 bg-[#0d1117] rounded-xl border border-[#30363d] text-[10px] font-mono leading-relaxed overflow-x-auto print:bg-slate-100 print:text-black">
-                      <code className="text-[#79c0ff]">const</code> <code className="text-[#d2a8ff]">Equation</code> = {"{\n"}
-                      {"  "}A: <code className="text-[#ff7b72]">{results.A}</code>, <code className="text-[#8b949e]">// Root</code>{"\n"}
-                      {"  "}B: <code className="text-[#ff7b72]">{results.B}</code>, <code className="text-[#8b949e]">// Emotion</code>{"\n"}
-                      {"  "}D: <code className="text-[#ff7b72]">{results.D}</code>, <code className="text-[#8b949e]">// Process</code>{"\n"}
-                      {"  "}sitting: <code className="text-[#ff7b72]">{results.K}</code>{"\n"}
-                      {"}"};
-                    </pre>
-                  </div>
-               </div>
-            </div>
-
-            {/* Money Balance Module */}
-            <div className="bg-[#161b22] p-6 rounded-2xl border border-[#30363d] print:bg-white print:border-slate-300">
-               <div className="flex items-center gap-2 mb-4 text-[#f85149]">
-                  <Boxes size={16}/>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#8b949e]">Stability Buffer: Money</span>
-               </div>
-               <p className="text-[11px] leading-[1.7] text-[#8b949e] print:text-slate-700">
-                 3 号人的直觉极快但易产生“坏包”。Money (狸花猫) 的平稳生命特征可视为 **Biological Noise Cancellation**。在 U13 项目决策与 4 号流年复盘时，建议进行互动以锚定情绪。
-               </p>
-            </div>
-          </div>
-
-          {/* 右：八角全息数据雷达 (GitHub 风格) */}
-          <div className="lg:col-span-8 bg-[#161b22] p-8 rounded-2xl border border-[#30363d] flex flex-col items-center justify-center relative print:bg-white print:border-slate-300 print:text-black">
-            <div className="absolute top-6 left-8 flex items-center gap-2 opacity-40">
-               <Code2 size={16} className="text-[#3fb950]"/>
-               <span className="text-[10px] font-mono tracking-widest">HOLOGRAPHIC_RADAR_ENGINE</span>
-            </div>
-
-            <div className="relative w-[450px] h-[450px] flex items-center justify-center mt-6">
-              <svg className="absolute inset-0 w-full h-full overflow-visible opacity-30" viewBox="0 0 100 100">
-                <defs>
-                   <linearGradient id="gitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                     <stop offset="0%" stopColor="#388bfd" />
-                     <stop offset="100%" stopColor="#3fb950" />
-                   </linearGradient>
-                </defs>
-                <polygon points={getOctagonPoints(50, 50, 48)} fill="none" stroke="#30363d" strokeWidth="0.5" />
-                <polygon points={getOctagonPoints(50, 50, 36)} fill="none" stroke="#30363d" strokeWidth="0.2" />
-                <polygon points={getOctagonPoints(50, 50, 24)} fill="none" stroke="#30363d" strokeWidth="0.1" />
-                {/* 雷达面 */}
-                <polygon points={getRadarPoints(50, 50, 48, results.metrics)} fill="url(#gitGrad)" fillOpacity="0.1" stroke="url(#gitGrad)" strokeWidth="1.2" className="transition-all duration-700" />
-              </svg>
-
-              {/* 核心 Apex */}
-              <div className="absolute z-10">
-                 <div className={`w-32 h-32 rounded-[2.5rem] bg-[#0d1117] flex flex-col items-center justify-center text-white border-4 border-[#30363d] shadow-[0_0_50px_rgba(56,139,253,0.3)] print:bg-white print:text-black print:shadow-none print:border-slate-900`}>
-                   <span className="text-[10px] font-mono text-[#8b949e] mb-1">MAIN_TRAIT</span>
-                   <span className="text-6xl font-black leading-none">{results.F}</span>
-                   <span className="text-[10px] font-bold text-[#58a6ff] mt-2 tracking-widest uppercase">Apex.Exec()</span>
-                 </div>
-              </div>
-
-              {/* 八角标签 */}
-              {results.metrics.map((m, i) => {
-                const a = (i * 45 - 90) * (Math.PI / 180);
-                return (
-                  <div key={i} className="absolute flex flex-col items-center" style={{ left: `${50 + 58 * Math.cos(a)}%`, top: `${50 + 58 * Math.sin(a)}%` }}>
-                    <span className="text-[9px] font-bold text-[#8b949e] uppercase mb-0.5">{m.label}</span>
-                    <span className="text-xs font-black text-white print:text-black">{m.val}</span>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* GitHub 贡献风格统计栏 */}
-            <div className="mt-20 w-full pt-10 border-t border-[#30363d] flex flex-col gap-6 print:border-slate-300">
-               <div className="flex items-center justify-between px-2">
-                 <span className="text-[10px] font-bold text-[#8b949e] uppercase">Matrix Contribution Graph</span>
-                 <div className="flex gap-1 items-center">
-                    <span className="text-[8px] text-[#8b949e]">Less</span>
-                    <div className="flex gap-1">
-                      {[1, 2, 3, 4, 5].map(i => <div key={i} className={`w-3 h-3 rounded-sm ${i === 1 ? 'bg-[#161b22]' : i === 2 ? 'bg-[#0e4429]' : i === 3 ? 'bg-[#006d32]' : i === 4 ? 'bg-[#26a641]' : 'bg-[#39d353]'}`}></div>)}
-                    </div>
-                    <span className="text-[8px] text-[#8b949e]">More</span>
-                 </div>
-               </div>
-               <div className="grid grid-cols-2 gap-10">
-                  <div className="flex gap-4">
-                    <GitBranch size={20} className="text-[#3fb950] shrink-0 mt-1"/>
-                    <div>
-                      <h4 className="text-[11px] font-bold text-white mb-1">Feature: Structural Logic</h4>
-                      <p className="text-[10px] text-[#8b949e] leading-relaxed italic">
-                        2026 年（流年 4）是您的“架构大版本”。U13 项目的代码已经写好，现在需要进行“单元测试”与“法律边界确认”。
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex gap-4 border-l border-[#30363d] pl-8">
-                    <Zap size={20} className="text-[#58a6ff] shrink-0 mt-1"/>
-                    <div>
-                      <h4 className="text-[11px] font-bold text-white mb-1">Commit: Execution Intensity</h4>
-                      <p className="text-[10px] text-[#8b949e] leading-relaxed italic">
-                        主命数 3 号赋予了您高频率的 Commit 能力。在股票市场中，建议减少“热补丁”操作，以稳健的长线 Merge 为主。
-                      </p>
-                    </div>
-                  </div>
-               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* 战略 Log 输出区域 */}
-        <div className="flex flex-col gap-6 no-print">
-           <div className="flex justify-between items-center">
-              <h3 className="text-[10px] font-bold text-[#8b949e] uppercase tracking-[0.4em] flex items-center gap-2"><Activity size={14} className="text-[#58a6ff]"/> Git Strategic Log Analysis</h3>
-              <button onClick={handleAiAnalyze} disabled={aiLoading} className="px-6 py-2.5 bg-[#21262d] hover:bg-[#30363d] border border-[#30363d] text-white rounded-lg text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg">
-                {aiLoading ? <Loader2 className="animate-spin" size={14}/> : <Terminal size={14}/>} Compile Analytics
-              </button>
-           </div>
-
-           {aiResponse && (
-             <div className="bg-[#161b22] p-10 rounded-2xl border border-[#30363d] shadow-2xl relative overflow-hidden print:bg-white print:text-black">
-                <div className="flex items-center gap-2 mb-6 text-[#58a6ff] pb-4 border-b border-[#30363d]">
-                   <FileText size={20}/>
-                   <span className="text-sm font-black uppercase tracking-widest">Bo: master-report.md</span>
-                </div>
-                <div className="text-[14px] text-[#c9d1d9] leading-[1.9] border-l-4 border-[#30363d] pl-10 print:text-slate-800 print:border-slate-300 font-mono italic whitespace-pre-wrap print:font-sans print:not-italic">
-                   {aiResponse}
-                </div>
-             </div>
-           )}
-        </div>
-
-        {/* Command Terminal */}
-        <div className="bg-[#0d1117] p-8 rounded-2xl border border-[#30363d] shadow-2xl no-print">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="flex gap-1.5">
-              <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-              <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-              <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
-            </div>
-            <span className="text-[10px] font-mono text-[#8b949e] ml-3">/users/castor/bo-ai-assistant --exec</span>
-          </div>
-          <div className="flex gap-4">
-            <span className="text-[#58a6ff] font-bold mt-4">$</span>
-            <input 
-              type="text" 
-              value={chatInput}
-              onChange={(e) => setChatInput(e.target.value)}
-              placeholder="输入分析指令，例如: git analyse --stock SUNCON --year 2026"
-              className="flex-grow bg-transparent border-none py-4 text-sm font-mono text-white focus:ring-0 outline-none placeholder:text-[#484f58]"
-              onKeyDown={(e) => e.key === 'Enter' && handleChat()}
-            />
-            <button onClick={handleChat} disabled={aiLoading || !chatInput.trim()} className="px-8 bg-[#238636] hover:bg-[#2ea44f] text-white rounded-lg font-bold text-xs uppercase tracking-widest transition-all">
-              {aiLoading ? <Loader2 className="animate-spin" size={16} /> : 'RUN'}
-            </button>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center pb-12 opacity-20 print:border-t print:pt-10 print:mt-12 print:opacity-100 print:text-slate-400">
-          <p className="text-[9px] uppercase tracking-[0.6em] font-mono">Bo Matrix Engine • Strategic Intelligence • Created by Castor Limited</p>
-        </div>
-      </div>
-      
-      <style>{`
-        @media print {
-          body { background-color: white !important; color: black !important; padding: 0 !important; }
-          .no-print { display: none !important; }
-          .only-print { display: block !important; }
-          .min-h-screen { min-height: auto !important; background: white !important; padding: 0 !important; }
-          .max-w-6xl { max-width: 100% !important; margin: 0 !important; padding: 15px !important; }
-          #report-content { display: grid !important; }
-          svg polygon { stroke: #ccc !important; opacity: 0.5 !important; }
-          page-break-inside: avoid;
+            // Render Radar Chart
+            if(chartInstance) chartInstance.destroy();
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: metrics.map(m => m.label),
+                    datasets: [{
+                        data: metrics.map(m => m.val),
+                        backgroundColor: 'rgba(56, 139, 253, 0.1)',
+                        borderColor: '#58a6ff',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#58a6ff',
+                        pointRadius: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            grid: { color: '#30363d' },
+                            angleLines: { color: '#30363d' },
+                            pointLabels: { color: '#8b949e', font: { size: 10, weight: 'bold' } },
+                            ticks: { display: false },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
         }
-        .only-print { display: none; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #30363d; border-radius: 10px; }
-      `}</style>
-    </div>
-  );
-};
 
-export default App;
+        // --- INTERACTIVE HANDLERS ---
+        function setGender(g) {
+            currentProfile.gender = g;
+            document.getElementById('btn-male').className = g === 'Male' ? 'px-4 py-1.5 rounded-md text-[10px] font-bold bg-git-blue text-white shadow-lg transition-all' : 'px-4 py-1.5 rounded-md text-[10px] font-bold text-slate-500 transition-all';
+            document.getElementById('btn-female').className = g === 'Female' ? 'px-4 py-1.5 rounded-md text-[10px] font-bold bg-git-red text-white shadow-lg transition-all' : 'px-4 py-1.5 rounded-md text-[10px] font-bold text-slate-500 transition-all';
+            document.getElementById('avatar-box').innerHTML = g === 'Male' ? '<i class="fa-solid fa-mars text-git-blue"></i>' : '<i class="fa-solid fa-venus text-git-red"></i>';
+            updateMatrix();
+        }
+
+        function setTargetYear(y, el) {
+            currentProfile.targetYear = y;
+            document.querySelectorAll('#year-selector button').forEach(btn => {
+                btn.className = 'shrink-0 px-5 py-2.5 rounded-xl text-xs font-black transition-all border bg-[#0d1117] border-git-border text-slate-500';
+            });
+            el.className = 'shrink-0 px-5 py-2.5 rounded-xl text-xs font-black transition-all border bg-[#388bfd]/20 border-git-blue text-git-blue shadow-lg';
+            updateMatrix();
+        }
+
+        function generateHeatmap() {
+            const grid = document.getElementById('heatmap-grid');
+            grid.innerHTML = '';
+            for (let i = 0; i < 52 * 7; i++) {
+                let cell = document.createElement('div');
+                let seed = Math.random();
+                let color = seed > 0.9 ? 'bg-[#39d353]' : seed > 0.7 ? 'bg-[#26a641]' : seed > 0.4 ? 'bg-[#006d32]' : seed > 0.2 ? 'bg-[#0e4429]' : 'bg-[#161b22]';
+                cell.className = `heatmap-cell ${color}`;
+                grid.appendChild(cell);
+            }
+        }
+
+        // --- AI API LOGIC ---
+        async function callBo(prompt, system) {
+            const output = document.getElementById('ai-output');
+            const text = document.getElementById('ai-text');
+            const btn = document.getElementById('ai-btn');
+
+            output.classList.remove('hidden');
+            text.innerHTML = ">>> COMPILING STRATEGIC LOGS...\n>>> ACCESSING DECISION KERNEL...";
+            btn.disabled = true;
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const body = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: system }] }
+            };
+
+            try {
+                const response = await fetch(url, { method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } });
+                const data = await response.json();
+                const result = data.candidates?.[0]?.content?.parts?.[0]?.text || "COMPILE_FAILED: UNKNOWN_ERROR";
+                text.innerText = result;
+            } catch (err) {
+                text.innerText = "CRITICAL_ERROR: " + err.message;
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        function generateAIReport() {
+            const res = calculateResults();
+            const prompt = `Analyze 1980-09-30, Year ${currentProfile.targetYear} (Flow ${res.py}). Focus: Coach & Trader. 狸花猫 Money 为情绪中和项。请给出整齐、专业、代码审计风格的中文建议。`;
+            callBo(prompt, "You are a professional strategist Bo.");
+        }
+
+        function handleTerminalChat() {
+            const input = document.getElementById('chat-input').value;
+            if(!input.trim()) return;
+            callBo(input, "Respond as Bo, the strategic assistant.");
+            document.getElementById('chat-input').value = '';
+        }
+
+        function shareWhatsApp() {
+            const res = calculateResults();
+            const msg = encodeURIComponent(
+                `📊 CASTOR STRATEGIC BLUEPRINT v5.0\n` +
+                `🔢 APEX: ${res.F} | FLOW: ${res.py} | 坐镇: ${res.K}\n` +
+                `💡 2026年策略：架构扎根，防守性增长。\n` +
+                `>>> 全息量化报告已生成。`
+            );
+            window.open(`https://wa.me/?text=${msg}`, '_blank');
+        }
+    </script>
+</body>
+</html>
